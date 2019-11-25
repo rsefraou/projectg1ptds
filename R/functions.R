@@ -120,7 +120,7 @@ wait_time = 2)
 #' @import magrittr dplyr scales stringr ggplot2 stats remotes devtools
 #' @export
 reddit_content <- function (URL, wait_time = 2) {
-  install_cran("RedditExtractoR",force=T)
+ # install_cran("RedditExtractoR",force=T)
   library("RedditExtractoR")
   if (is.null(URL) | length(URL) == 0 | !is.character(URL)) {
     stop("invalid URL parameter")
@@ -226,7 +226,7 @@ reddit_content <- function (URL, wait_time = 2) {
 #' @import magrittr dplyr scales stringr ggplot2 stats remotes devtools
 #' @export
 get_user_comments <- function(user = "",page_threshold = 2,wait_time = 4){
-  install_cran("RedditExtractoR",force=T)
+  #install_cran("RedditExtractoR",force=T)
   library("RedditExtractoR")
   if (is.na(user) | user == "") {
     stop("Please enter an user name")
@@ -311,7 +311,7 @@ get_user_comments <- function(user = "",page_threshold = 2,wait_time = 4){
 #' @import magrittr dplyr scales stringr ggplot2 stats remotes tidyverse stringi devtools
 #' @export
 cleaning_text_function <- function(x,stopwords){
-  install_cran("RedditExtractoR",force=T)
+ # install_cran("RedditExtractoR",force=T)
   library("RedditExtractoR")
   if(is.character(x)) {
     #condition to ingore characters columns with only internet link
