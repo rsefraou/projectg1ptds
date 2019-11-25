@@ -19,7 +19,7 @@ reddit_urls_mod<- function (search_terms = "", regex_filter = "", subreddit = NA
 cn_threshold = 0, page_threshold = 1, sort_by = "relevance", time_frame= "week",
 wait_time = 2)
 {
-  remotes::install_cran("RedditExctractoR")
+  remotes::install_cran("RedditExctractoR",force=T)
   library("RedditExtractoR")
   if (!grepl("^comments$|^new$|^relevance$|^top$", sort_by)) {
     stop("sort_by must be either 'new', 'comments', 'top' or 'relevance'")
@@ -120,7 +120,7 @@ wait_time = 2)
 #' @import magrittr dplyr scales stringr ggplot2 stats remotes
 #' @export
 reddit_content <- function (URL, wait_time = 2) {
-  remotes::install_cran("RedditExctractoR")
+  remotes::install_cran("RedditExctractoR", force=T)
   library("RedditExtractoR")
   if (is.null(URL) | length(URL) == 0 | !is.character(URL)) {
     stop("invalid URL parameter")
@@ -226,7 +226,7 @@ reddit_content <- function (URL, wait_time = 2) {
 #' @import magrittr dplyr scales stringr ggplot2 stats remotes
 #' @export
 get_user_comments <- function(user = "",page_threshold = 2,wait_time = 4){
-  remotes::install_cran("RedditExctractoR")
+  remotes::install_cran("RedditExctractoR", force=T)
   library("RedditExtractoR")
   if (is.na(user) | user == "") {
     stop("Please enter an user name")
@@ -311,7 +311,7 @@ get_user_comments <- function(user = "",page_threshold = 2,wait_time = 4){
 #' @import magrittr dplyr scales stringr ggplot2 stats remotes tidyverse stringi
 #' @export
 cleaning_text_function <- function(x,stopwords){
-  remotes::install_cran("RedditExctractoR")
+  remotes::install_cran("RedditExctractoR", force=T)
   library("RedditExtractoR")
   if(is.character(x)) {
     #condition to ingore characters columns with only internet link
