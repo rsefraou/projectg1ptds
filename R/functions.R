@@ -10,7 +10,7 @@
 #' @param time_frame A \code{char} (character) used to specify if we look only at last week, last month, or all
 #' @param wait_time A \code{num} (numeric) used to specify the waiting time between scrappings.
 #' @return A \code{dataframe} with the scraping done
-#' @import magrittr dplyr scales stringr ggplot2 stats remotes
+#' @import magrittr dplyr scales stringr ggplot2 stats remotes devtools
 #' @export
 #' @example
 #' Adresses<-reddit_urls_mod(search_terms = "federer", regex_filter = "", subreddit = "tennis",
@@ -117,7 +117,7 @@ wait_time = 2)
 #' @param URL A \code{URL} (URL) used to specify what URL we want to extract the data from
 #' @param wait_time A \code{num} (numeric) used to specify the time between scrappings
 #' @return A \code{dataframe} with the scraping done
-#' @import magrittr dplyr scales stringr ggplot2 stats remotes
+#' @import magrittr dplyr scales stringr ggplot2 stats remotes devtools
 #' @export
 reddit_content <- function (URL, wait_time = 2) {
   remotes::install_cran("RedditExctractoR", force=T)
@@ -223,7 +223,7 @@ reddit_content <- function (URL, wait_time = 2) {
 #' @param page_treshold A \code{num} (numeric) used to specify the maxiumum number of pages to scrap
 #' @param wait_time A \code{num} (numeric) used to specify the waiting time between scrappings.
 #' @return A \code{dataframe} with the scraping done
-#' @import magrittr dplyr scales stringr ggplot2 stats remotes
+#' @import magrittr dplyr scales stringr ggplot2 stats remotes devtools
 #' @export
 get_user_comments <- function(user = "",page_threshold = 2,wait_time = 4){
   remotes::install_cran("RedditExctractoR", force=T)
@@ -308,7 +308,7 @@ get_user_comments <- function(user = "",page_threshold = 2,wait_time = 4){
 #' @param x A \code{dataframe} (dataframe) we want to clean
 #' @param stopwords A \code{list} (list) used to specify the stopwords we want to take off the dataframe
 #' @return A \code{dataframe} with the scraped data cleaned
-#' @import magrittr dplyr scales stringr ggplot2 stats remotes tidyverse stringi
+#' @import magrittr dplyr scales stringr ggplot2 stats remotes tidyverse stringi devtools
 #' @export
 cleaning_text_function <- function(x,stopwords){
   remotes::install_cran("RedditExctractoR", force=T)
