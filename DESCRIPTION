@@ -19,7 +19,7 @@ Imports:
     ggplot2,
     Rcpp,
     stringi, 
-    RedditExctractoR,
+    remotes,
     tidyverse,
     shiny (>= 1.4.0)
 Depends:
