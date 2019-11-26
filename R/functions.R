@@ -344,3 +344,87 @@ cleaning_text_function <- function(x,stopwords){
   }
   return(x)
 }
+
+#' @title Plot sentiments from a researched word
+#'
+#' @describeIn plot_sentimentsReddit returns a sentiment analysis of a typed word .
+#' @param word A \code{char} (character) used to specify the word to research reddit for
+#' @param stopwords A \code{vectir} (vector) used to specify a list of words that will be used as stopwords
+#' @return A \code{plot} with sentiments
+#' @import magrittr dplyr scales stringr ggplot2 stats remotes devtools
+#' @export
+ plot_sentimentsReddit <- function( word, stopwords) {
+# install_cran("RedditExtractoR",force=T)
+library("RedditExtractoR")
+if(is.character(word)) {
+  data<-projectg1ptds::reddit_urls_mod(search_terms = "word", regex_filter = "", subreddit =NA,
+                                       cn_threshold = 1, page_threshold = 1, sort_by = "new", time_frame= "day",
+                                       wait_time = 12)
+
+  stopwords_vec <- c(stopwords::stopwords("en"), "don", "isn", "gt", "i", word)
+
+  data.1 <- projectg1ptds::reddit_content(data[1:10,5], wait_time = 2)
+
+  data.1["comment"] <- tibble::as_tibble(sapply(data.1["comment"],
+                                                projectg1ptds::cleaning_text_function,
+                                                stopwords= c(stopwords::stopwords("en"), word, stopwords_vec )))
+
+  contenu_wordcloud <- data.1 %>%
+    mutate(comment2 = comment) %>%
+    tibble::as_tibble() %>%
+    unnest_tokens(word, comment) %>%
+    filter(is.na(as.numeric(word)))
+
+
+  ##SentimentAnalysis:
+
+  contenu_sentiments <- contenu_wordcloud %>%
+    inner_join(get_sentiments("nrc"), by = "word") %>%
+    group_by( sentiment) %>%
+    count()
+
+  ggplot(contenu_sentiments, aes(x = sentiment,y=n, fill = sentiment)) +
+    geom_bar(stat = "identity") +
+    theme_bw()+
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    labs(x = "", y = "Number of words", fill = "Sentiment")
+}
+}
+
+#' @title Get wordcloud
+#'
+#' @describeIn plot_wordcloudReddit returns a wordcloud of a typed word
+#' @param word A \code{char} (character) used to specify the word to research reddit for
+#' @param stopwords A \code{vectir} (vector) used to specify a list of words that will be used as stopwords
+#' @return A \code{plot} with the wordcloud
+#' @import magrittr dplyr scales stringr ggplot2 stats remotes devtools
+#' @export
+ plot_wordcloudReddit<-function(word, stopwords){
+
+   library("RedditExtractoR")
+   if(is.character(word)) {
+     data<-projectg1ptds::reddit_urls_mod(search_terms = "word", regex_filter = "", subreddit =NA,
+                                          cn_threshold = 1, page_threshold = 5, sort_by = "new", time_frame= "week",
+                                          wait_time = 12)
+
+     stopwords_vec <- c(stopwords::stopwords("en"), "don", "isn", "gt", "i", word)
+
+     data.1 <- projectg1ptds::reddit_content(data[1:10,5], wait_time = 2)
+
+     data.1["comment"] <- tibble::as_tibble(sapply(data.1["comment"],
+                                                   projectg1ptds::cleaning_text_function,
+                                                   stopwords= c(stopwords::stopwords("en"), word, stopwords_vec )))
+
+     contenu_wordcloud <- data.1 %>%
+       mutate(comment2 = comment) %>%
+       tibble::as_tibble() %>%
+       unnest_tokens(word, comment) %>%
+       filter(is.na(as.numeric(word)))
+
+     contenu_wordcloud %>%
+       count(word) %>%
+       with(wordcloud(word, n, max.words = 50, colors=brewer.pal(8, "Spectral")))
+
+   }}
+
+
