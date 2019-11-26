@@ -372,7 +372,7 @@ library("RedditExtractoR")
   contenu_wordcloud <- data.1 %>%
     mutate(comment2 = comment) %>%
     tibble::as_tibble() %>%
-    unnest_tokens(word, comment) %>%
+    tidytext::unnest_tokens(word, comment) %>%
     filter(is.na(as.numeric(word)))
 
 
@@ -420,7 +420,7 @@ library("RedditExtractoR")
      contenu_wordcloud <- data.1 %>%
        mutate(comment2 = comment) %>%
        tibble::as_tibble() %>%
-       unnest_tokens(word, comment) %>%
+       tidytext::unnest_tokens(word, comment) %>%
        filter(is.na(as.numeric(word)))
 
      contenu_wordcloud %>%
