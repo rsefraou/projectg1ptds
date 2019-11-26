@@ -380,7 +380,7 @@ library("RedditExtractoR")
 
   contenu_sentiments <- contenu_wordcloud %>%
     dplyr::inner_join(tidytext::get_sentiments("nrc"), by = "word") %>%
-    group_by( sentiment) %>%
+    dplyr::group_by(sentiment) %>%
     count()
 
   ggplot(contenu_sentiments, aes(x = sentiment,y=n, fill = sentiment)) +
