@@ -351,7 +351,7 @@ cleaning_text_function <- function(x,stopwords){
 #' @param word A \code{char} (character) used to specify the word to research reddit for
 #' @param stopwords A \code{vectir} (vector) used to specify a list of words that will be used as stopwords
 #' @return A \code{plot} with sentiments
-#' @import magrittr dplyr scales stringr ggplot2 stats remotes devtools wordcloud tidytext
+#' @import magrittr dplyr scales stringr ggplot2 stats remotes devtools wordcloud tidytext stopwords
 #' @export
  plot_sentimentsReddit <- function( word, stopwords) {
 # install_cran("RedditExtractoR",force=T)
@@ -399,7 +399,7 @@ library("RedditExtractoR")
 #' @param word A \code{char} (character) used to specify the word to research reddit for
 #' @param stopwords A \code{vectir} (vector) used to specify a list of words that will be used as stopwords
 #' @return A \code{plot} with the wordcloud
-#' @import magrittr dplyr scales stringr ggplot2 stats remotes devtools wordcloud tidytext
+#' @import magrittr dplyr scales stringr ggplot2 stats remotes devtools wordcloud tidytext stopwords
 #' @export
  plot_wordcloudReddit<-function(word, stopwords){
 
