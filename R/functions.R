@@ -404,18 +404,26 @@ library("RedditExtractoR")
  plot_wordcloudReddit<-function(word, stopwords){
 
    library("RedditExtractoR")
-
-     data<-projectg1ptds::reddit_urls_mod(search_terms = "word", regex_filter = "", subreddit =NA,
-                                          cn_threshold = 1, page_threshold = 5, sort_by = "new", time_frame= "week",
+     #word<-as.character(word)
+     data<-projectg1ptds::reddit_urls_mod(search_terms = "word",
+                                          regex_filter = "",
+                                          subreddit =NA,
+                                          cn_threshold = 1,
+                                          page_threshold = 5,
+                                          sort_by = "new",
+                                          time_frame= "day",
                                           wait_time = 12)
 
      stopwords_vec <- c(stopwords::stopwords("en"), "don", "isn", "gt", "i", word)
 
-     data.1 <- projectg1ptds::reddit_content(data[1:10,5], wait_time = 2)
+     data.1 <- projectg1ptds::reddit_content(data[1:10,5],
+                                             wait_time = 2)
 
      data.1["comment"] <- tibble::as_tibble(sapply(data.1["comment"],
                                                    projectg1ptds::cleaning_text_function,
-                                                   stopwords= c(stopwords::stopwords("en"), word, stopwords_vec )))
+                                                   stopwords= c(stopwords::stopwords("en"),
+                                                                word,
+                                                                stopwords_vec)))
 
      contenu_wordcloud <- data.1 %>%
        mutate(comment2 = comment) %>%
@@ -426,7 +434,6 @@ library("RedditExtractoR")
      contenu_wordcloud %>%
        count(word) %>%
        with(wordcloud(word, n, max.words = 50, colors=brewer.pal(8, "Spectral")))
-
-   }
+ }
 
 
