@@ -356,7 +356,7 @@ cleaning_text_function <- function(x,stopwords){
  plot_sentimentsReddit <- function( word, stopwords) {
 # install_cran("RedditExtractoR",force=T)
 library("RedditExtractoR")
-if(is.character(word)) {
+
   data<-projectg1ptds::reddit_urls_mod(search_terms = "word", regex_filter = "", subreddit =NA,
                                        cn_threshold = 1, page_threshold = 1, sort_by = "new", time_frame= "day",
                                        wait_time = 12)
@@ -388,7 +388,7 @@ if(is.character(word)) {
     theme_bw()+
     theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
     labs(x = "", y = "Number of words", fill = "Sentiment")
-}
+
 }
 
 #' @title Get wordcloud
@@ -402,7 +402,7 @@ if(is.character(word)) {
  plot_wordcloudReddit<-function(word, stopwords){
 
    library("RedditExtractoR")
-   if(is.character(word)) {
+
      data<-projectg1ptds::reddit_urls_mod(search_terms = "word", regex_filter = "", subreddit =NA,
                                           cn_threshold = 1, page_threshold = 5, sort_by = "new", time_frame= "week",
                                           wait_time = 12)
@@ -425,6 +425,6 @@ if(is.character(word)) {
        count(word) %>%
        with(wordcloud(word, n, max.words = 50, colors=brewer.pal(8, "Spectral")))
 
-   }}
+   }
 
 
