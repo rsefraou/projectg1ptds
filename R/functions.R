@@ -379,7 +379,7 @@ library("RedditExtractoR")
   ##SentimentAnalysis:
 
   contenu_sentiments <- contenu_wordcloud %>%
-    inner_join(get_sentiments("nrc"), by = "word") %>%
+    dplyr::inner_join(get_sentiments("nrc"), by = "word") %>%
     group_by( sentiment) %>%
     count()
 
