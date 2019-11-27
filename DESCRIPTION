@@ -22,7 +22,6 @@ Imports:
     stringi, 
     remotes,
     tidyverse,
-    devtools,
     wordcloud,
     tidytext,
     stopwords, 
