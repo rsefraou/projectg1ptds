@@ -7,14 +7,14 @@
 get_user_comments(user = "", page_threshold = 2, wait_time = 4)
 }
 \arguments{
-\item{user}{A \code{char} (character) used to specify what the username}
+\item{user}{used to specify what the username}
 
-\item{wait_time}{A \code{num} (numeric) used to specify the waiting time between scrappings.}
+\item{wait_time}{used to specify the waiting time between scrappings.}
 
-\item{page_treshold}{A \code{num} (numeric) used to specify the maxiumum number of pages to scrap}
+\item{page_treshold}{used to specify the maxiumum number of pages to scrap}
 }
 \value{
-A \code{dataframe} with the scraping done
+A dataframe with the scraping done
 }
 \description{
 Get comments from a user

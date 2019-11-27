@@ -12,7 +12,7 @@ plot_sentimentsReddit(word, stopwords)
 \item{stopwords}{used to specify a list of words that will be used as stopwords}
 }
 \value{
-sentiments
+sentiments plot
 }
 \description{
 Plot sentiments from a researched word

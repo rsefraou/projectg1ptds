@@ -7,9 +7,9 @@
 reddit_content(URL, wait_time = 2)
 }
 \arguments{
-\item{URL}{A \code{URL} (URL) used to specify what URL we want to extract the data from}
+\item{URL}{used to specify what URL we want to extract the data from}
 
-\item{wait_time}{A \code{num} (numeric) used to specify the time between scrappings}
+\item{wait_time}{used to specify the time between scrappings}
 }
 \value{
 A \code{dataframe} with the scraping done

@@ -7,12 +7,12 @@
 cleaning_text_function(x, stopwords)
 }
 \arguments{
-\item{x}{A \code{dataframe} (dataframe) we want to clean}
+\item{x}{we want to clean}
 
-\item{stopwords}{A \code{list} (list) used to specify the stopwords we want to take off the dataframe}
+\item{stopwords}{used to specify the stopwords we want to take off the dataframe}
 }
 \value{
-A \code{dataframe} with the scraped data cleaned
+the scraped data cleaned
 }
 \description{
 Clean data scrapped from reddit
