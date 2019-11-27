@@ -370,7 +370,6 @@ library("RedditExtractoR")
                                                 stopwords= c(stopwords::stopwords("en"), word, stopwords_vec )))
 
   contenu_wordcloud <- data.1 %>%
-    mutate(comment2 = comment) %>%
     tibble::as_tibble() %>%
     tidytext::unnest_tokens(word, comment) %>%
     filter(is.na(as.numeric(word)))
@@ -426,7 +425,6 @@ library("RedditExtractoR")
                                                                 stopwords_vec)))
 
      contenu_wordcloud <- data.1 %>%
-       mutate(comment2 = comment) %>%
        tibble::as_tibble() %>%
        tidytext::unnest_tokens(word, comment) %>%
        filter(is.na(as.numeric(word)))
