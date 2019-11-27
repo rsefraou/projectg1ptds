@@ -114,8 +114,8 @@ wait_time = 2)
 #' @title Retrieve content from given URL
 #'
 #' @describeIn reddit_content returns a dataframe scrapped using a url.
-#' @param URL A \code{URL} (URL) used to specify what URL we want to extract the data from
-#' @param wait_time A \code{num} (numeric) used to specify the time between scrappings
+#' @param URL  used to specify what URL we want to extract the data from
+#' @param wait_time  used to specify the time between scrappings
 #' @return A \code{dataframe} with the scraping done
 #' @import magrittr dplyr scales stringr ggplot2 stats remotes devtools
 #' @export
@@ -219,10 +219,10 @@ reddit_content <- function (URL, wait_time = 2) {
 #' @title Get comments from a user
 #'
 #' @describeIn get_user_comments returns a dataframe scrapped using username.
-#' @param user A \code{char} (character) used to specify what the username
-#' @param page_treshold A \code{num} (numeric) used to specify the maxiumum number of pages to scrap
-#' @param wait_time A \code{num} (numeric) used to specify the waiting time between scrappings.
-#' @return A \code{dataframe} with the scraping done
+#' @param user  used to specify what the username
+#' @param page_treshold  used to specify the maxiumum number of pages to scrap
+#' @param wait_time  used to specify the waiting time between scrappings.
+#' @return A dataframe with the scraping done
 #' @import magrittr dplyr scales stringr ggplot2 stats remotes devtools
 #' @export
 get_user_comments <- function(user = "",page_threshold = 2,wait_time = 4){
@@ -305,9 +305,9 @@ get_user_comments <- function(user = "",page_threshold = 2,wait_time = 4){
 #' @title Clean data scrapped from reddit
 #'
 #' @describeIn cleaning_text_function returns a dataframe cleaned
-#' @param x A \code{dataframe} (dataframe) we want to clean
-#' @param stopwords A \code{list} (list) used to specify the stopwords we want to take off the dataframe
-#' @return A \code{dataframe} with the scraped data cleaned
+#' @param x  we want to clean
+#' @param stopwords  used to specify the stopwords we want to take off the dataframe
+#' @return the scraped data cleaned
 #' @import magrittr dplyr scales stringr ggplot2 stats remotes tidyverse stringi devtools
 #' @export
 cleaning_text_function <- function(x,stopwords){
@@ -350,7 +350,7 @@ cleaning_text_function <- function(x,stopwords){
 #' @describeIn plot_sentimentsReddit returns a sentiment analysis of a typed word .
 #' @param word used to specify the word to research reddit for
 #' @param stopwords  used to specify a list of words that will be used as stopwords
-#' @return sentiments
+#' @return sentiments plot
 #' @import magrittr dplyr ggplot2  wordcloud tidytext stopwords
 #' @export
  plot_sentimentsReddit <- function( word, stopwords) {
