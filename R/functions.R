@@ -382,7 +382,7 @@ library("RedditExtractoR")
     dplyr::group_by(sentiment) %>%
     plyr::count()
 
-  ggplot(contenu_sentiments, aes(x = sentiment,y=n, fill = sentiment)) +
+  ggplot(contenu_sentiments, aes(x = sentiment,y=freq, fill = sentiment)) +
     ggplot2::geom_bar(stat = "identity") +
     ggplot2::theme_bw()+
     ggplot2::theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
@@ -431,7 +431,7 @@ library("RedditExtractoR")
 
      contenu_wordcloud %>%
        plyr::count(word) %>%
-       with(wordcloud::wordcloud(word, n, max.words = 50,
+       with(wordcloud::wordcloud(word, freq, max.words = 50,
                                  colors=RColorBrewer::brewer.pal(8, "Spectral")))
  }
 
