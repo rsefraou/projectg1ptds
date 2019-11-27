@@ -12,8 +12,7 @@ Authors@R: c(
 Maintainer: Rita Sefraoui <rita.sefraouitahiri@unil.ch>
 Description: This package allows us to scrap and clean data from Reddit for text mining utilizations
 Imports: 
-    magrittr,
-    plyr, 
+    magrittr, 
     dplyr,
     scales,
     stringr,
