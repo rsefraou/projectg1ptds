@@ -7,12 +7,12 @@
 plot_wordcloudReddit(word, stopwords)
 }
 \arguments{
-\item{word}{A \code{char} (character) used to specify the word to research reddit for}
+\item{word}{used to specify the word to research reddit for}
 
-\item{stopwords}{A \code{vectir} (vector) used to specify a list of words that will be used as stopwords}
+\item{stopwordsused}{to specify a list of words that will be used as stopwords}
 }
 \value{
-A \code{plot} with the wordcloud
+with the wordcloud
 }
 \description{
 Get wordcloud

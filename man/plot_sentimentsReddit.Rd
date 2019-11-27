@@ -7,12 +7,12 @@
 plot_sentimentsReddit(word, stopwords)
 }
 \arguments{
-\item{word}{A \code{char} (character) used to specify the word to research reddit for}
+\item{word}{used to specify the word to research reddit for}
 
-\item{stopwords}{A \code{vectir} (vector) used to specify a list of words that will be used as stopwords}
+\item{stopwords}{used to specify a list of words that will be used as stopwords}
 }
 \value{
-A \code{plot} with sentiments
+sentiments
 }
 \description{
 Plot sentiments from a researched word
