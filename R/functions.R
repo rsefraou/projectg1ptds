@@ -348,10 +348,10 @@ cleaning_text_function <- function(x,stopwords){
 #' @title Plot sentiments from a researched word
 #'
 #' @describeIn plot_sentimentsReddit returns a sentiment analysis of a typed word .
-#' @param word A \code{char} (character) used to specify the word to research reddit for
-#' @param stopwords A \code{vectir} (vector) used to specify a list of words that will be used as stopwords
-#' @return A \code{plot} with sentiments
-#' @import magrittr dplyr scales stringr ggplot2 stats remotes devtools wordcloud tidytext stopwords
+#' @param word used to specify the word to research reddit for
+#' @param stopwords  used to specify a list of words that will be used as stopwords
+#' @return sentiments
+#' @import magrittr dplyr ggplot2  wordcloud tidytext stopwords
 #' @export
  plot_sentimentsReddit <- function( word, stopwords) {
 # install_cran("RedditExtractoR",force=T)
@@ -396,23 +396,23 @@ library("RedditExtractoR")
 #' @title Get wordcloud
 #'
 #' @describeIn plot_wordcloudReddit returns a wordcloud of a typed word
-#' @param word A \code{char} (character) used to specify the word to research reddit for
-#' @param stopwords A \code{vectir} (vector) used to specify a list of words that will be used as stopwords
-#' @return A \code{plot} with the wordcloud
-#' @import magrittr dplyr scales stringr ggplot2 stats remotes devtools wordcloud tidytext stopwords RColorBrewer
+#' @param word  used to specify the word to research reddit for
+#' @param stopwordsused to specify a list of words that will be used as stopwords
+#' @return  with the wordcloud
+#' @import magrittr dplyr ggplot2 wordcloud tidytext stopwords RColorBrewer
 #' @export
  plot_wordcloudReddit<-function(word, stopwords){
 
    library("RedditExtractoR")
      #word<-as.character(word)
-     data<-projectg1ptds::reddit_urls_mod(search_terms = "word",
-                                          regex_filter = "",
+     data<-projectg1ptds::reddit_urls_mod(search_terms ="word",
+                                          regex_filter ="",
                                           subreddit =NA,
-                                          cn_threshold = 1,
-                                          page_threshold = 5,
-                                          sort_by = "new",
-                                          time_frame= "day",
-                                          wait_time = 12)
+                                          cn_threshold =1,
+                                          page_threshold =5,
+                                          sort_by ="new",
+                                          time_frame="day",
+                                          wait_time =12)
 
      stopwords_vec <- c(stopwords::stopwords("en"), "don", "isn", "gt", "i", word)
 
