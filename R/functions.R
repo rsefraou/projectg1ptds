@@ -10,7 +10,7 @@
 #' @param time_frame A \code{char} (character) used to specify if we look only at last week, last month, or all
 #' @param wait_time A \code{num} (numeric) used to specify the waiting time between scrappings.
 #' @return A \code{dataframe} with the scraping done
-#' @import magrittr dplyr scales stringr ggplot2 remotes
+#' @import magrittr dplyr scales stringr ggplot2 remotes devtools
 #' @export
 #' @example
 #' Adresses<-reddit_urls_mod(search_terms = "federer", regex_filter = "", subreddit = "tennis",
@@ -117,7 +117,7 @@ wait_time = 2)
 #' @param URL  used to specify what URL we want to extract the data from
 #' @param wait_time  used to specify the time between scrappings
 #' @return A \code{dataframe} with the scraping done
-#' @import magrittr dplyr scales stringr ggplot2 remotes
+#' @import magrittr dplyr scales stringr ggplot2 remotes devtools
 #' @export
 reddit_content <- function (URL, wait_time = 2) {
  # install_cran("RedditExtractoR",force=T)
@@ -223,7 +223,7 @@ reddit_content <- function (URL, wait_time = 2) {
 #' @param page_treshold  used to specify the maxiumum number of pages to scrap
 #' @param wait_time  used to specify the waiting time between scrappings.
 #' @return A dataframe with the scraping done
-#' @import magrittr dplyr scales stringr ggplot2 remotes
+#' @import magrittr dplyr scales stringr ggplot2 remotes devtools
 #' @export
 get_user_comments <- function(user = "",page_threshold = 2,wait_time = 4){
   #install_cran("RedditExtractoR",force=T)
@@ -308,7 +308,7 @@ get_user_comments <- function(user = "",page_threshold = 2,wait_time = 4){
 #' @param x  we want to clean
 #' @param stopwords  used to specify the stopwords we want to take off the dataframe
 #' @return the scraped data cleaned
-#' @import magrittr dplyr scales stringr ggplot2 remotes tidyverse stringi
+#' @import magrittr dplyr scales stringr ggplot2 remotes tidyverse stringi devtools
 #' @export
 cleaning_text_function <- function(x,stopwords){
  # install_cran("RedditExtractoR",force=T)
@@ -351,7 +351,7 @@ cleaning_text_function <- function(x,stopwords){
 #' @param word used to specify the word to research reddit for
 #' @param stopwords  used to specify a list of words that will be used as stopwords
 #' @return sentiments plot
-#' @import magrittr dplyr ggplot2 wordcloud tidytext stopwords
+#' @import magrittr dplyr ggplot2 wordcloud tidytext stopwords devtools
 #' @export
  plot_sentimentsReddit <- function( word, stopwords) {
 # install_cran("RedditExtractoR",force=T)
@@ -398,7 +398,7 @@ library("RedditExtractoR")
 #' @param word  used to specify the word to research reddit for
 #' @param stopwordsused to specify a list of words that will be used as stopwords
 #' @return  with the wordcloud
-#' @import magrittr dplyr ggplot2 wordcloud tidytext stopwords RColorBrewer
+#' @import magrittr dplyr ggplot2 wordcloud tidytext stopwords RColorBrewer devtools
 #' @export
  plot_wordcloudReddit<-function(word, stopwords){
 
