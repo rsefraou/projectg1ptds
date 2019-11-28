@@ -120,8 +120,7 @@ wait_time = 2)
 #' @return A \code{dataframe} with the scraping done
 #' @export
 reddit_content <- function (URL, wait_time = 2, word) {
-  # install_cran("RedditExtractoR",force=T)
-  #library("RedditExtractoR")
+
 
   # XXX
   stopwords_vec <- c(stopwords::stopwords("en"), "don", "isn", "gt", "i", word)
