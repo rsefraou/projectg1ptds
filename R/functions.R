@@ -119,9 +119,13 @@ wait_time = 2)
 #' @param wait_time  used to specify the time between scrappings
 #' @return A \code{dataframe} with the scraping done
 #' @export
-reddit_content <- function (URL, wait_time = 2) {
- # install_cran("RedditExtractoR",force=T)
+reddit_content <- function (URL, wait_time = 2, word) {
+  # install_cran("RedditExtractoR",force=T)
   #library("RedditExtractoR")
+
+  # XXX
+  stopwords_vec <- c(stopwords::stopwords("en"), "don", "isn", "gt", "i", word)
+
   if (is.null(URL) | length(URL) == 0 | !is.character(URL)) {
     stop("invalid URL parameter")
   }
@@ -130,7 +134,8 @@ reddit_content <- function (URL, wait_time = 2) {
     replies = node$data$replies
     reply.nodes = if (is.list(replies))
       replies$data$children
-    else NULL
+    else
+      NULL
     return(list(Attribute, lapply(reply.nodes, function(x) {
       GetAttribute(x, feature)
     })))
@@ -143,19 +148,39 @@ reddit_content <- function (URL, wait_time = 2) {
     replies = node$data$replies
     reply.nodes = if (is.list(replies))
       replies$data$children
-    else NULL
-    return(list(paste0(filter, " ", depth), lapply(1:length(reply.nodes),
-                                                   function(x) get.structure(reply.nodes[[x]], paste0(depth,
-                                                                                                      "_", x)))))
+    else
+      NULL
+    return(list(
+      paste0(filter, " ", depth),
+      lapply(1:length(reply.nodes),
+             function(x)
+               get.structure(reply.nodes[[x]], paste0(depth,
+                                                      "_", x)))
+    ))
   }
-  data_extract = data.frame(id = numeric(), structure = character(),
-                            post_date = as.Date(character()), comm_date = as.Date(character()),
-                            num_comments = numeric(), subreddit = character(), upvote_prop = numeric(),
-                            post_score = numeric(), author = character(), user = character(),
-                            comment_score = numeric(), controversiality = numeric(),
-                            comment = character(), title = character(), post_text = character(),
-                            link = character(), domain = character(), URL = character())
-  pb = utils::txtProgressBar(min = 0, max = length(URL), style = 3)
+  data_extract = data.frame(
+    id = numeric(),
+    structure = character(),
+    post_date = as.Date(character()),
+    comm_date = as.Date(character()),
+    num_comments = numeric(),
+    subreddit = character(),
+    upvote_prop = numeric(),
+    post_score = numeric(),
+    author = character(),
+    user = character(),
+    comment_score = numeric(),
+    controversiality = numeric(),
+    comment = character(),
+    title = character(),
+    post_text = character(),
+    link = character(),
+    domain = character(),
+    URL = character()
+  )
+  pb = utils::txtProgressBar(min = 0,
+                             max = length(URL),
+                             style = 3)
   for (i in seq(URL)) {
     if (!grepl("^https?://(.*)", URL[i]))
       URL[i] = paste0("https://www.", gsub("^.*(reddit\\..*$)",
@@ -164,52 +189,83 @@ reddit_content <- function (URL, wait_time = 2) {
       URL[i] = paste0(gsub("/$", "", URL[i]), "/?ref=search_posts")
     X = paste0(gsub("\\?ref=search_posts$", "", URL[i]),
                ".json?limit=500")
-    raw_data = tryCatch(RJSONIO::fromJSON(readLines(X, warn = FALSE)),
-                        error = function(e) NULL)
+    raw_data = tryCatch(
+      RJSONIO::fromJSON(readLines(X, warn = FALSE)),
+      error = function(e)
+        NULL
+    )
     if (is.null(raw_data)) {
       Sys.sleep(min(1, wait_time))
-      raw_data = tryCatch(RJSONIO::fromJSON(readLines(X,
-                                                      warn = FALSE)), error = function(e) NULL)
+      raw_data = tryCatch(
+        RJSONIO::fromJSON(readLines(X,
+                                    warn = FALSE)),
+        error = function(e)
+          NULL
+      )
     }
     if (is.null(raw_data) == FALSE) {
       meta.node = raw_data[[1]]$data$children[[1]]$data
       main.node = raw_data[[2]]$data$children
       if (min(length(meta.node), length(main.node)) > 0) {
         structure = unlist(lapply(1:length(main.node),
-                                  function(x) get.structure(main.node[[x]], x)))
-        TEMP = data.frame(id = NA, structure = gsub("FALSE ",
-                                                    "", structure[!grepl("TRUE", structure)]),
-                          post_date = format(as.Date(as.POSIXct(meta.node$created_utc,
-                                                                origin = "1970-01-01")), "%d-%m-%y"), comm_date = format(as.Date(as.POSIXct(unlist(lapply(main.node,
-                                                                                                                                                          function(x) {
-                                                                                                                                                            GetAttribute(x, "created_utc")
-                                                                                                                                                          })), origin = "1970-01-01")), "%d-%m-%y"),
-                          num_comments = meta.node$num_comments, subreddit = ifelse(is.null(meta.node$subreddit),
-                                                                                    "UNKNOWN", meta.node$subreddit), upvote_prop = meta.node$upvote_ratio,
-                          post_score = meta.node$score, author = meta.node$author,
-                          user = unlist(lapply(main.node, function(x) {
-                            GetAttribute(x, "author")
-                          })), comment_score = unlist(lapply(main.node,
-                                                             function(x) {
-                                                               GetAttribute(x, "score")
-                                                             })), controversiality = unlist(lapply(main.node,
-                                                                                                   function(x) {
-                                                                                                     GetAttribute(x, "controversiality")
-                                                                                                   })), comment = unlist(lapply(main.node, function(x) {
-                                                                                                     GetAttribute(x, "body")
-                                                                                                   })), title = meta.node$title, post_text = meta.node$selftext,
-                          link = meta.node$url, domain = meta.node$domain,
-                          URL = URL[i], stringsAsFactors = FALSE)
+                                  function(x)
+                                    get.structure(main.node[[x]], x)))
+        TEMP = data.frame(
+          id = NA,
+          structure = gsub("FALSE ",
+                           "", structure[!grepl("TRUE", structure)]),
+          post_date = format(as.Date(
+            as.POSIXct(meta.node$created_utc,
+                       origin = "1970-01-01")
+          ), "%d-%m-%y"),
+          comm_date = format(as.Date(
+            as.POSIXct(unlist(lapply(main.node,
+                                     function(x) {
+                                       GetAttribute(x, "created_utc")
+                                     })), origin = "1970-01-01")
+          ), "%d-%m-%y"),
+          num_comments = meta.node$num_comments,
+          subreddit = ifelse(
+            is.null(meta.node$subreddit),
+            "UNKNOWN",
+            meta.node$subreddit
+          ),
+          upvote_prop = meta.node$upvote_ratio,
+          post_score = meta.node$score,
+          author = meta.node$author,
+          user = unlist(lapply(main.node, function(x) {
+            GetAttribute(x, "author")
+          })),
+          comment_score = unlist(lapply(main.node,
+                                        function(x) {
+                                          GetAttribute(x, "score")
+                                        })),
+          controversiality = unlist(lapply(main.node,
+                                           function(x) {
+                                             GetAttribute(x, "controversiality")
+                                           })),
+          comment = unlist(lapply(main.node, function(x) {
+            GetAttribute(x, "body")
+          })),
+          title = meta.node$title,
+          post_text = meta.node$selftext,
+          link = meta.node$url,
+          domain = meta.node$domain,
+          URL = URL[i],
+          stringsAsFactors = FALSE
+        )
         TEMP$id = 1:nrow(TEMP)
         if (dim(TEMP)[1] > 0 & dim(TEMP)[2] > 0)
           data_extract = rbind(TEMP, data_extract)
-        else print(paste("missed", i, ":", URL[i]))
+        else
+          print(paste("missed", i, ":", URL[i]))
       }
     }
     utils::setTxtProgressBar(pb, i)
     Sys.sleep(min(2, wait_time))
   }
-  data_extract[,13] <- cleaning_text_function(data_extract[,13], stopwords =   stopwords_vec)
+  data_extract[, 13] <-
+    cleaning_text_function(data_extract[, 13], stopwords = stopwords_vec)
 
   close(pb)
   return(data_extract)
@@ -355,15 +411,13 @@ cleaning_text_function <- function(x,stopwords){
 # install_cran("RedditExtractoR",force=T)
    # library("RedditExtractoR")
 
-   browser()
-
   data<-projectg1ptds::reddit_urls_mod(search_terms = "word", regex_filter = "", subreddit =NA,
                                        cn_threshold = 1, page_threshold = 1, sort_by = "new", time_frame= "day",
                                        wait_time = 12)
 
   stopwords_vec <- c(stopwords::stopwords("en"), "don", "isn", "gt", "i", word)
 
-  data.1 <- projectg1ptds::reddit_content(data[1:10,5], wait_time = 2)
+  data.1 <- projectg1ptds::reddit_content(data[1:10,5], wait_time = 2, word)
 
   data.1["comment"] <- tibble::as_tibble(sapply(data.1["comment"],
                                                 projectg1ptds::cleaning_text_function,
@@ -382,10 +436,10 @@ cleaning_text_function <- function(x,stopwords){
     dplyr::group_by(sentiment) %>%
     dplyr::count()
 
-  ggplot(contenu_sentiments, aes(x = sentiment,y=n, fill = sentiment)) +
+  ggplot2::ggplot(contenu_sentiments, ggplot2::aes(x = sentiment,y=n, fill = sentiment)) +
     ggplot2::geom_bar(stat = "identity") +
     ggplot2::theme_bw()+
-    ggplot2::theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)) +
     ggplot2::labs(x = "", y = "Number of words", fill = "Sentiment")
 
  }

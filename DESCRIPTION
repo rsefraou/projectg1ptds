@@ -22,6 +22,7 @@ Imports:
     tidyverse,
     wordcloud,
     tidytext,
+    textdata,
     stopwords, 
     RColorBrewer,
     shiny (>= 1.4.0),
