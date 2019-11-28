@@ -4,7 +4,7 @@
 \alias{reddit_content}
 \title{Retrieve content from given URL}
 \usage{
-reddit_content(URL, wait_time = 2)
+reddit_content(URL, wait_time = 2, word)
 }
 \arguments{
 \item{URL}{used to specify what URL we want to extract the data from}

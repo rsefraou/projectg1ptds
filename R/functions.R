@@ -272,6 +272,7 @@ reddit_content <- function (URL, wait_time = 2, word) {
 }
 
 
+
 #' @title Get comments from a user
 #'
 #' @describeIn get_user_comments returns a dataframe scrapped using username.
