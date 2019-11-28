@@ -461,7 +461,7 @@ cleaning_text_function <- function(x,stopwords){
 
    stopwords_vec <- c(stopwords::stopwords("en"), "don", "isn", "gt", "i", word)
 
-   data.1 <- projectg1ptds::reddit_content(data[1:10,5], wait_time = 2)
+   data.1 <- projectg1ptds::reddit_content(data[1:10,5], wait_time = 2, word)
 
    data.1["comment"] <- tibble::as_tibble(sapply(data.1["comment"],
                                                  projectg1ptds::cleaning_text_function,
