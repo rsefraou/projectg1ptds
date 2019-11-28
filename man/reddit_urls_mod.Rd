@@ -4,9 +4,16 @@
 \alias{reddit_urls_mod}
 \title{Scrapping urls}
 \usage{
-reddit_urls_mod(search_terms = "", regex_filter = "", subreddit = NA,
-  cn_threshold = 0, page_threshold = 1, sort_by = "relevance",
-  time_frame = "week", wait_time = 2)
+reddit_urls_mod(
+  search_terms = "",
+  regex_filter = "",
+  subreddit = NA,
+  cn_threshold = 0,
+  page_threshold = 1,
+  sort_by = "relevance",
+  time_frame = "week",
+  wait_time = 2
+)
 }
 \arguments{
 \item{search_terms}{A \code{char} (character) used to specify what the user is looking for}
@@ -36,3 +43,7 @@ Scrapping urls
 \item \code{reddit_urls_mod}: returns a dataframe scrapped using a url. It differs from the existing function with the addition of the time frame that is limited to one week.
 }}
 
+\examples{
+Adresses<-reddit_urls_mod(search_terms = "federer", regex_filter = "", subreddit = "tennis",
+cn_threshold = 1, page_threshold = 25, sort_by = "new", time_frame= "all", wait_time = 4)
+}
