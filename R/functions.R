@@ -10,17 +10,16 @@
 #' @param time_frame A \code{char} (character) used to specify if we look only at last week, last month, or all
 #' @param wait_time A \code{num} (numeric) used to specify the waiting time between scrappings.
 #' @return A \code{dataframe} with the scraping done
-#' @import magrittr dplyr scales stringr ggplot2 remotes devtools
 #' @export
-#' @example
+#' @examples
 #' Adresses<-reddit_urls_mod(search_terms = "federer", regex_filter = "", subreddit = "tennis",
 #' cn_threshold = 1, page_threshold = 25, sort_by = "new", time_frame= "all", wait_time = 4)
 reddit_urls_mod<- function (search_terms = "", regex_filter = "", subreddit = NA,
 cn_threshold = 0, page_threshold = 1, sort_by = "relevance", time_frame= "week",
 wait_time = 2)
 {
-  install_cran("RedditExtractoR",force=T)
-  library("RedditExtractoR")
+  #install_cran("RedditExtractoR",force=T)
+  #library("RedditExtractoR")
   if (!grepl("^comments$|^new$|^relevance$|^top$", sort_by)) {
     stop("sort_by must be either 'new', 'comments', 'top' or 'relevance'")
   }
@@ -54,11 +53,13 @@ wait_time = 2)
   comm_filter = 10000
   while (is.null(next_page) == FALSE & page_counter < page_threshold &
          comm_filter >= cn_threshold & length(index) > 0) {
+
     search_JSON = tryCatch(RJSONIO::fromJSON(readLines(search_query,
                                                        warn = FALSE)), error = function(e) NULL)
     if (is.null(search_JSON)) {
       cat(paste("Cannot connect to the website, skipping...\n"))
       next
+      #Delay
     }
     else {
       contents = search_JSON[[2]]$children
@@ -117,11 +118,10 @@ wait_time = 2)
 #' @param URL  used to specify what URL we want to extract the data from
 #' @param wait_time  used to specify the time between scrappings
 #' @return A \code{dataframe} with the scraping done
-#' @import magrittr dplyr scales stringr ggplot2 remotes devtools
 #' @export
 reddit_content <- function (URL, wait_time = 2) {
  # install_cran("RedditExtractoR",force=T)
-  library("RedditExtractoR")
+  #library("RedditExtractoR")
   if (is.null(URL) | length(URL) == 0 | !is.character(URL)) {
     stop("invalid URL parameter")
   }
@@ -223,11 +223,10 @@ reddit_content <- function (URL, wait_time = 2) {
 #' @param page_treshold  used to specify the maxiumum number of pages to scrap
 #' @param wait_time  used to specify the waiting time between scrappings.
 #' @return A dataframe with the scraping done
-#' @import magrittr dplyr scales stringr ggplot2 remotes devtools
 #' @export
 get_user_comments <- function(user = "",page_threshold = 2,wait_time = 4){
   #install_cran("RedditExtractoR",force=T)
-  library("RedditExtractoR")
+  # library("RedditExtractoR")
   if (is.na(user) | user == "") {
     stop("Please enter an user name")
   }
@@ -308,18 +307,17 @@ get_user_comments <- function(user = "",page_threshold = 2,wait_time = 4){
 #' @param x  we want to clean
 #' @param stopwords  used to specify the stopwords we want to take off the dataframe
 #' @return the scraped data cleaned
-#' @import magrittr dplyr scales stringr ggplot2 remotes tidyverse stringi devtools
 #' @export
 cleaning_text_function <- function(x,stopwords){
  # install_cran("RedditExtractoR",force=T)
-  library("RedditExtractoR")
+  # library("RedditExtractoR")
   if(is.character(x)) {
     #condition to ingore characters columns with only internet link
-    if (sum(str_sub(x, 1, 10) == "http://www",na.rm = TRUE) < length(x)/2) {
+    if (sum(stringr::str_sub(x, 1, 10) == "http://www",na.rm = TRUE) < length(x)/2) {
       #met les accents à la place du code html
       Encoding(x) <- 'latin1'
       #enleve les accents et met des lettres simples
-      x <- stri_trans_general(x, 'Latin-ASCII')
+      x <- stringi::stri_trans_general(x, 'Latin-ASCII')
       x <- unlist(lapply(x, function(x, stopwords) {
         #sépare tout les mots
         x <- unlist(strsplit(x, " "))
@@ -351,11 +349,13 @@ cleaning_text_function <- function(x,stopwords){
 #' @param word used to specify the word to research reddit for
 #' @param stopwords  used to specify a list of words that will be used as stopwords
 #' @return sentiments plot
-#' @import magrittr dplyr ggplot2 wordcloud tidytext stopwords devtools
+#' @importFrom magrittr "%>%"
 #' @export
  plot_sentimentsReddit <- function( word, stopwords) {
 # install_cran("RedditExtractoR",force=T)
-library("RedditExtractoR")
+   # library("RedditExtractoR")
+
+   browser()
 
   data<-projectg1ptds::reddit_urls_mod(search_terms = "word", regex_filter = "", subreddit =NA,
                                        cn_threshold = 1, page_threshold = 1, sort_by = "new", time_frame= "day",
@@ -398,11 +398,10 @@ library("RedditExtractoR")
 #' @param word  used to specify the word to research reddit for
 #' @param stopwordsused to specify a list of words that will be used as stopwords
 #' @return  with the wordcloud
-#' @import magrittr dplyr ggplot2 wordcloud tidytext stopwords RColorBrewer devtools
 #' @export
  plot_wordcloudReddit<-function(word, stopwords){
 
-   library("RedditExtractoR")
+   # library("RedditExtractoR")
      #word<-as.character(word)
      data<-projectg1ptds::reddit_urls_mod(search_terms ="word",
                                           regex_filter ="",
