@@ -2,6 +2,7 @@
 
 export(cleaning_text_function)
 export(get_user_comments)
+export(map_reddit)
 export(plot_sentiments_reddit)
 export(plot_wordcloud_reddit)
 export(reddit_content)
