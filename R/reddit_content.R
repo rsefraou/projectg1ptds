@@ -6,7 +6,7 @@
 #' @export
 reddit_content <- function (URL, wait_time = 2) {
   
-  stopwords_vec <- c(stopwords::stopwords("en"), "don", "isn", "gt", "i")
+  #stopwords_vec <- c(stopwords::stopwords("en"), "don", "isn", "gt", "i")
   
   if (is.null(URL) | length(URL) == 0 | !is.character(URL)) {
     stop("invalid URL parameter")
