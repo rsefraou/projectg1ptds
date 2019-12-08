@@ -26,6 +26,10 @@ Imports:
     stopwords, 
     RColorBrewer,
     lubridate,
+    leaflet,
+    sf,
+    spData,
+    tmap,
     shiny (>= 1.4.0),
     RedditExtractoR (>= 2.1.5)
 Depends:
