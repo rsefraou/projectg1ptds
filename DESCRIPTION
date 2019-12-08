@@ -25,6 +25,7 @@ Imports:
     textdata,
     stopwords, 
     RColorBrewer,
+    lubridate,
     shiny (>= 1.4.0),
     RedditExtractoR (>= 2.1.5)
 Depends:
