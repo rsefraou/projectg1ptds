@@ -1,6 +1,5 @@
 #' @title Retrieve content from given URL
 #'
-#' @describeIn reddit_content returns a dataframe scrapped using a url.
 #' @param URL  used to specify what URL we want to extract the data from
 #' @param wait_time  used to specify the time between scrappings
 #' @return A \code{dataframe} with the scraping done
