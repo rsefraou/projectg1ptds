@@ -7,7 +7,7 @@
 #' @export
 plot_sentiments_reddit <- function(word, stopwords) {
   data <- projectg1ptds::reddit_urls_mod(
-    search_terms = "word",
+    search_terms = word,
     subreddit = NA,
     sort_by = "new",
     time_frame = "day"
