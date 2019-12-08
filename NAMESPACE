@@ -2,8 +2,8 @@
 
 export(cleaning_text_function)
 export(get_user_comments)
-export(plot_sentimentsReddit)
-export(plot_wordcloudReddit)
+export(plot_sentiments_reddit)
+export(plot_wordcloud_reddit)
 export(reddit_content)
 export(reddit_urls_mod)
 importFrom(magrittr,"%>%")
