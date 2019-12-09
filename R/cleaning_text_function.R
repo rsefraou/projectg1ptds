@@ -5,7 +5,7 @@
 #' @return the scraped data cleaned
 #' @export
 cleaning_text_function <- function(x, stopwords=stopwords_vec) {
-
+  stopwords_vec <- c(stopwords::stopwords("en"), "don", "isn", "gt", "i")
   if (is.character(x)) {
     #Put accents instead of code html (only for french)
     Encoding(x) <- 'latin1'
