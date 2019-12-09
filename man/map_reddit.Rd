@@ -4,7 +4,7 @@
 \alias{map_reddit}
 \title{Get a map with countries that appear in comments}
 \usage{
-map_reddit(word)
+map_reddit(word, subreddit, sort, timeframe)
 }
 \arguments{
 \item{word}{a word to research reddit for}
