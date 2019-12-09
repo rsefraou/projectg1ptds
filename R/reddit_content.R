@@ -144,8 +144,8 @@ reddit_content <- function (URL, wait_time = 2) {
     utils::setTxtProgressBar(pb, i)
     Sys.sleep(min(2, wait_time))
   }
-  data_extract[,13] <-
-    cleaning_text_function(data_extract[,13])
+  # data_extract[,13] <-
+  #   cleaning_text_function(data_extract[,13])
   close(pb)
   return(data_extract)
 }
