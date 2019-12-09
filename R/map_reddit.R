@@ -14,9 +14,9 @@ map_reddit<-function(word, sub, sort, timeframe){
 
   contenu <- projectg1ptds::reddit_content(Adresses[,5])
 
-  contenu[,5] <- tibble::as_tibble(sapply(contenu[,5],
-                                          projectg1ptds::cleaning_text_function,
-                                          stopwords =stopwords_vec ))
+  # contenu[,5] <- tibble::as_tibble(sapply(contenu[,5],
+  #                                         projectg1ptds::cleaning_text_function,
+  #                                         stopwords =stopwords_vec ))
 
 
   #upload of a data base with all the country name
