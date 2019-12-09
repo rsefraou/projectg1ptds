@@ -6,8 +6,6 @@
 #' @export
 reddit_content <- function (URL, wait_time = 2) {
 
-  stopwords_vec <- c(stopwords::stopwords("en"), "don", "isn", "gt", "i")
-
   if (is.null(URL) | length(URL) == 0 | !is.character(URL)) {
     stop("invalid URL parameter")
   }
@@ -146,8 +144,8 @@ reddit_content <- function (URL, wait_time = 2) {
     utils::setTxtProgressBar(pb, i)
     Sys.sleep(min(2, wait_time))
   }
-  data_extract[, 13] <-
-    cleaning_text_function(data_extract[, 13], stopwords =   stopwords_vec)
+  data_extract[,13] <-
+    cleaning_text_function(data_extract[,13])
   close(pb)
   return(data_extract)
 }
