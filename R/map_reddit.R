@@ -3,9 +3,9 @@
 #' @param word a word to research reddit for
 #' @return  map
 #' @export
-map_reddit<-function(word, subreddit, sort, timeframe){
+map_reddit<-function(word, sub, sort, timeframe){
   #to create a function first we need to form a database
-  Adresses<-projectg1ptds::reddit_urls_mod(search_terms = word, subreddit = subredit
+  Adresses<-projectg1ptds::reddit_urls_mod(search_terms = word, subreddit = sub
                                            , sort_by = sort , time_frame= timeframe)
 
   #scrap the content of the discussion link
