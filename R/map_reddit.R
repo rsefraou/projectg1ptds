@@ -16,7 +16,7 @@ map_reddit<-function(word, sub, sort, timeframe){
 
   contenu[,5] <- tibble::as_tibble(sapply(contenu[,5],
                                           projectg1ptds::cleaning_text_function,
-                                          stopwords =stopwords::stopwords("en") ))
+                                          stopwords =stopwords_vec ))
 
 
   #upload of a data base with all the country name
