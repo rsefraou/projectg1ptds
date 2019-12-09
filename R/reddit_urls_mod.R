@@ -5,7 +5,6 @@
 #' @param sort_by A \code{char} (character) used to specify if we scrape by new, by relevance etc. Relevance is the default
 #' @param time_frame A \code{char} (character) used to specify if we look only at last week, last month, or all
 #' @return A \code{dataframe} with the scraping done
-#' @importFrom magrittr "%in%"
 #' @export
 #' @examples
 #' Adresses<-reddit_urls_mod(search_terms = "federer", subreddit = "tennis", sort_by = "new", time_frame= "all")
