@@ -3,21 +3,7 @@
 #' @param word a word to research reddit for
 #' @return  map
 #' @export
-map_reddit<-function(word, sub, sort, timeframe){
-  #to create a function first we need to form a database
-  Adresses<-projectg1ptds::reddit_urls_mod(search_terms = word, subreddit = sub
-                                           , sort_by = sort , time_frame= timeframe)
-
-  #scrap the content of the discussion link
-  stopwords_vec <- c(stopwords::stopwords("en"), "don", "isn", "gt", "i")
-  stopwords_a <- c("don","t","i","gt")
-
-  contenu <- projectg1ptds::reddit_content(Adresses[,5])
-
-  # contenu[,5] <- tibble::as_tibble(sapply(contenu[,5],
-  #                                         projectg1ptds::cleaning_text_function,
-  #                                         stopwords =stopwords_vec ))
-
+map_reddit<-function(df){
 
   #upload of a data base with all the country name
 
@@ -29,7 +15,7 @@ map_reddit<-function(word, sub, sort, timeframe){
 
 
   #clean the data set to have a better overview of words
-  contenu_cleaned <- contenu %>%
+  contenu_cleaned <- df %>%
     as.tibble() %>%
     unnest_tokens(word, comment) %>%
     filter(is.na(as.numeric(word)))
