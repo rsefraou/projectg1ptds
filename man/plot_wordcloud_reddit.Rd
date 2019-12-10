@@ -4,7 +4,7 @@
 \alias{plot_wordcloud_reddit}
 \title{Get wordcloud}
 \usage{
-plot_wordcloud_reddit(word, stopwords)
+plot_wordcloud_reddit(df)
 }
 \arguments{
 \item{word}{used to specify the word to research reddit for}
