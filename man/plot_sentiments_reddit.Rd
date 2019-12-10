@@ -4,7 +4,7 @@
 \alias{plot_sentiments_reddit}
 \title{Plot sentiments from a researched word}
 \usage{
-plot_sentiments_reddit(word, stopwords)
+plot_sentiments_reddit(df)
 }
 \arguments{
 \item{word}{used to specify the word to research reddit for}
