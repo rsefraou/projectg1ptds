@@ -74,9 +74,10 @@ map_reddit<-function(df){
   World$frequency <- final_joint$frequency
 
   #creation of the static map
-  tm_shape(World)+
+  map <- tm_shape(World)+
     tm_fill(col="frequency")+
     tm_borders()+
     tm_style("classic")+
     tmap_mode("view")
+  return(map)
 }
