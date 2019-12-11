@@ -17,6 +17,7 @@ Imports:
     scales,
     stringr,
     ggplot2,
+    magick, 
     Rcpp,
     stringi, 
     tidyverse,
