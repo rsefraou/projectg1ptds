@@ -3,7 +3,6 @@
 #' @param word a word to research reddit for
 #' @return  map
 #' @export
-
 map_reddit<-function(df){
 
   #upload of a data base with all the country name
