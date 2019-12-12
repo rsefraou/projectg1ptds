@@ -139,7 +139,7 @@ reddit_content <- function (URL, wait_time = 2) {
           print(paste("missed", i, ":", URL[i]))
       }
     }
-    incProgress()
+    incProgress(amount = 1/nrow(URL))
     Sys.sleep(min(2, wait_time))
   }
   # data_extract[,13] <-
