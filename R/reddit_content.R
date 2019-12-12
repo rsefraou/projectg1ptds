@@ -58,9 +58,7 @@ reddit_content <- function (URL, wait_time = 2) {
     domain = character(),
     URL = character()
   )
-  pb = utils::txtProgressBar(min = 0,
-                             max = length(URL),
-                             style = 3)
+  withProgress(message = 'Work in progress', value = 0, {
   for (i in seq(URL)) {
     if (!grepl("^https?://(.*)", URL[i]))
       URL[i] = paste0("https://www.", gsub("^.*(reddit\\..*$)",
@@ -141,11 +139,11 @@ reddit_content <- function (URL, wait_time = 2) {
           print(paste("missed", i, ":", URL[i]))
       }
     }
-    utils::setTxtProgressBar(pb, i)
+    incProgress()
     Sys.sleep(min(2, wait_time))
   }
   # data_extract[,13] <-
   #   cleaning_text_function(data_extract[,13])
-  close(pb)
+  })
   return(data_extract)
 }
