@@ -12,7 +12,7 @@ get_user_comments <-
     if (is.na(user) | user == "") {
       stop("Please enter an user name")
     }
-    
+
     cached_links = tibble(
       date = as.Date(character()),
       num_comments = numeric(),
@@ -22,12 +22,14 @@ get_user_comments <-
       comment = character(),
       score = numeric()
     )
-    
+
     user_address = search_query = paste0("https://www.reddit.com/user/",
                                          user,
                                          "/comments/.json")
     next_page = ""
     page_counter = 0
+
+    withProgress(message = 'Work in progress', value = 0, {
     while (is.null(next_page) == FALSE &
            page_counter < page_threshold) {
       search_JSON = tryCatch(
@@ -64,7 +66,7 @@ get_user_comments <-
         ),
         origin = "1970-01-01 00:00"),
         "%Y-%m-%d %H:%M")
-        
+
         temp_dat = tibble(
           date = search_date,
           num_comments = search_num_comments,
@@ -74,9 +76,9 @@ get_user_comments <-
           comment = search_comment,
           score = search_score
         )[c(seq(25 * (page_counter + 1))), ]
-        
+
         cached_links = rbind(cached_links, temp_dat)
-        
+
         next_page = search_JSON$data$after
         comm_filter = utils::tail(search_num_comments, 1)
         search_query = paste0(user_address,
@@ -84,12 +86,14 @@ get_user_comments <-
                               (page_counter + 1) * 25,
                               "&after=",
                               next_page)
-        
+
         page_counter = page_counter + 1
-        
+        incProgress(amount = 1/250)
         Sys.sleep(min(2, wait_time))
       }
+
     }
+    })
     final_table = cached_links[!duplicated(cached_links),]
     if (dim(final_table)[1] == 0) {
       cat(paste("\nNo results retrieved, check your query"))
