@@ -4,7 +4,7 @@
 #' @param wait_time  used to specify the time between scrappings
 #' @return A \code{dataframe} with the scraping done
 #' @export
-reddit_content <- function (URL, wait_time = 2) {
+reddit_content <- function (URL, wait_time = 1) {
 
   if (is.null(URL) | length(URL) == 0 | !is.character(URL)) {
     stop("invalid URL parameter")
@@ -58,7 +58,7 @@ reddit_content <- function (URL, wait_time = 2) {
     domain = character(),
     URL = character()
   )
-  withProgress(message = 'Work in progress', value = 0, {
+  withProgress(message = 'Work in progress', value = 0, min=0,max=1, {
   for (i in seq(URL)) {
     if (!grepl("^https?://(.*)", URL[i]))
       URL[i] = paste0("https://www.", gsub("^.*(reddit\\..*$)",
@@ -139,7 +139,7 @@ reddit_content <- function (URL, wait_time = 2) {
           print(paste("missed", i, ":", URL[i]))
       }
     }
-    incProgress(amount = 1/nrow(URL))
+    incProgress(amount = 1/length(URL))
     Sys.sleep(min(2, wait_time))
   }
   # data_extract[,13] <-
@@ -147,3 +147,8 @@ reddit_content <- function (URL, wait_time = 2) {
   })
   return(data_extract)
 }
+
+
+
+
+
