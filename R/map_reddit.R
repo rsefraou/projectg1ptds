@@ -3,6 +3,7 @@
 #' @param word a word to research reddit for
 #' @return  map
 #' @export
+
 map_reddit<-function(df){
 
   #upload of a data base with all the country name
@@ -39,8 +40,9 @@ map_reddit<-function(df){
   contenu_tokens <- contenu_cleaned %>%
     inner_join(countries, by = "word") %>%
     plyr::count()
+  # i guess the problem in shiny may come from this line
 
-  contenu_tokens_2 <- contenu_tokens[,20:21]
+  contenu_tokens_2 <- contenu_tokens[,19:21]
 
 
   clean_country <- contenu_tokens_2%>%dplyr:: group_by(name) %>% dplyr::summarise("frequency"=sum(freq))
