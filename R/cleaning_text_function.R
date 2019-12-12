@@ -6,7 +6,6 @@
 #' @export
 stopwords_vec <- c(stopwords::stopwords("en"), "don", "isn", "gt", "i", "re","removed","deleted","m","you re","we ll", "ve", "hasn","they re","id","tl dr", "didn", "wh","oh","tl","dr","shes","hes","aren","edit","ok","ll","wasn","shouldn","t","doesn","youre","going","still","much", "many","also")
 
-x<- cleaning_text_function(a)
 cleaning_text_function <- function(x) {
   if (is.character(x)) {
     #Put accents instead of code html (only for french)
