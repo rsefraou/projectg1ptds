@@ -4,7 +4,7 @@
 \alias{get_user_comments}
 \title{Get comments from a user}
 \usage{
-get_user_comments(user = "", page_threshold = 2, wait_time = 4)
+get_user_comments(user = "", page_threshold = 2, wait_time = 2)
 }
 \arguments{
 \item{user}{used to specify what the username}
