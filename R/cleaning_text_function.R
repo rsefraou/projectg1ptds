@@ -4,9 +4,10 @@
 #' @param stopwords  used to specify the stopwords we want to take off the dataframe
 #' @return the scraped data cleaned
 #' @export
-stopwords_vec <- c(stopwords::stopwords("en"), "don", "isn", "gt", "i", "re","removed","deleted","m","you re","we ll", "ve", "hasn","they re","id","tl dr", "didn", "wh","oh","tl","dr","shes","hes","aren","edit","ok","ll","wasn","shouldn","t","doesn","youre","going","still","much", "many","also")
 
-cleaning_text_function <- function(x) {
+cleaning_text_function <- function(x,stopwords=stopwords_vec) {
+  stopwords_vec <- c(stopwords::stopwords("en"), "don", "isn", "gt", "i", "re","removed","deleted","m","you re","we ll", "ve", "hasn","they re","id","tl dr", "didn", "wh","oh","tl","dr","shes","hes","aren","edit","ok","ll","wasn","shouldn","t","doesn","youre","going","still","much", "many","also")
+
   if (is.character(x)) {
     #Put accents instead of code html (only for french)
     Encoding(x) <- 'latin1'
