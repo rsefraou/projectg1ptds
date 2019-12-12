@@ -40,7 +40,7 @@ map_reddit<-function(df){
     inner_join(countries, by = "word") %>%
     plyr::count()
 
-  contenu_tokens_2 <- contenu_tokens[,19:20]
+  contenu_tokens_2 <- contenu_tokens[,20:21]
 
 
   clean_country <- contenu_tokens_2%>%dplyr:: group_by(name) %>% dplyr::summarise("frequency"=sum(freq))
@@ -76,8 +76,9 @@ map_reddit<-function(df){
   #creation of the static map
   map <- tm_shape(World)+
     tm_fill(col="frequency")+
+    tmap_mode('view')+
     tm_borders()+
-    tm_style("classic")+
-    tmap_mode("view")
+    tm_basemap(server = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+
   return(map)
 }
