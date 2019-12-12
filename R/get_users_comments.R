@@ -8,7 +8,7 @@
 get_user_comments <-
   function(user = "",
            page_threshold = 2,
-           wait_time = 4) {
+           wait_time = 2) {
     if (is.na(user) | user == "") {
       stop("Please enter an user name")
     }
