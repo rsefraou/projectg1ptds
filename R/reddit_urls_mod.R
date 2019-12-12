@@ -18,7 +18,7 @@ reddit_urls_mod<- function (search_terms = "", subreddit = "",
 
   regex_filter = ""
   cn_threshold = 0
-  page_threshold = 20
+  page_threshold = 15
   wait_time = 2
 
   cached_links = data.frame(date = as.Date(character()),
