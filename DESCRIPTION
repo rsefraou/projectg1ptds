@@ -29,6 +29,7 @@ Imports:
     plotly,
     lubridate,
     leaflet,
+    RColorBrewer,
     sf,
     spData,
     tmap,
