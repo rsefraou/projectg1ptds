@@ -26,6 +26,7 @@ Imports:
     textdata,
     stopwords, 
     RColorBrewer,
+    plotly,
     lubridate,
     leaflet,
     sf,
