@@ -20,4 +20,8 @@ montage <- function(df) {
 
 
   magick::image_montage(img)
+
+  i<- magick::image_montage(img)
+
+  return (i)
 }
