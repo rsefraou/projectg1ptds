@@ -21,11 +21,12 @@ plot_sentiments_reddit <- function(df) {
     dplyr::group_by(sentiment) %>%
     dplyr::count()
 
-  ggplot2::ggplot(contenu_sentiments,
-                  ggplot2::aes(x = sentiment, y = n, fill = sentiment)) +
+  plot_sentiment <- ggplot2::ggplot(contenu_sentiments,
+                                    ggplot2::aes(x = sentiment, y = n, fill = sentiment)) +
     ggplot2::geom_bar(stat = "identity") +
-    ggplot2::theme_bw() +
+    ggplot2::theme_classic() +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)) +
-    ggplot2::labs(x = "", y = "Number of words", fill = "Sentiment")
-
+    ggplot2::labs(x = "", y = "Number of words", fill = "Sentiment")+
+    scale_fill_brewer(palette="RdYlGn")
+  ggplotly(plot_sentiment)
 }
