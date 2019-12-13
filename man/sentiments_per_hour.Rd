@@ -4,7 +4,7 @@
 \alias{sentiments_per_hour}
 \title{Get sentiments per hour of the day}
 \usage{
-sentiments_per_hour(b)
+sentiments_per_hour(df)
 }
 \arguments{
 \item{b}{a database extracted from reddit_content()}
