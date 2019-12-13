@@ -41,7 +41,7 @@ map_reddit<-function(df){
     plyr::count()
   # i guess the problem in shiny may come from this line
 
-  contenu_tokens_2 <- contenu_tokens[,19:21]
+  contenu_tokens_2 <- contenu_tokens[,19:20]
 
 
   clean_country <- contenu_tokens_2%>%dplyr:: group_by(name) %>% dplyr::summarise("frequency"=sum(freq))
