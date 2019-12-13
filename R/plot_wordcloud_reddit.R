@@ -7,15 +7,16 @@
 
 plot_wordcloud_reddit <- function(df) {
 
-  stop_words<-c(stopwords::stopwords("en"))
+  stop_words<-c(stopwords::stopwords("en"))%>%as.data.frame()
+  colnames(stop_words)<-"word"
 
   contenu_wordcloud <- df %>%
     tibble::as_tibble() %>%
     tidytext::unnest_tokens(word, comment) %>%
     dplyr::filter(is.na(as.numeric(word)))%>%
-    anti_join(stop_words, by = "word") %>%
-    count(word, sort = TRUE)
-
+    dplyr::anti_join(stop_words, by = "word") %>%
+    dplyr::count(word, sort = TRUE)
+  #
   # contenu_wordcloud %>%
   #   dplyr::count(word) %>%
   #   with(wordcloud::wordcloud(
@@ -24,4 +25,7 @@ plot_wordcloud_reddit <- function(df) {
   #     max.words = 50,
   #     colors = RColorBrewer::brewer.pal(8, "Spectral")
   #   ))
+
+  return(contenu_wordcloud)
 }
+
