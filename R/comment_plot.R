@@ -26,6 +26,9 @@ comment_plot <- function(df) {
     mutate(posneg = ifelse(total < 0, 1,0))
 
   by_user_score$user <- factor(by_user_score$user, levels = by_user_score$user[order(-by_user_score$total)])
+  by_user_score$dummy <- ifelse(by_user_score$total >0, "1", "0")
+  by_user_score$dummy <- as.factor(by_user_score$dummy)
+
 
   #create a barplot to plot the total score by user
 
@@ -50,8 +53,9 @@ comment_plot <- function(df) {
     ggplot(by_user_score, aes(
       x = user,
       y = total,
-      fill = total > 0
+      fill = dummy
     )) +
+    scale_fill_manual(values = c("1" ="#006633" , "0" = "#c0392b"))+
     geom_bar(stat = "identity") +
     xlab("Pseudo of reddit user") +
     ylab("Total number of comment scores") +
@@ -62,6 +66,7 @@ comment_plot <- function(df) {
       legend.position = "none",
       axis.text = element_text(size = 8)
     )
-  return(hist_score)
 
+  hist_score_2 <-ggplotly(hist_score)
+  return(hist_score_2)
 }
