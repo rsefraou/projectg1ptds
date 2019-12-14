@@ -19,5 +19,5 @@ montage <- function(df) {
   img <- magick::image_join(images_list)
 
 
-  magick::image_append(image_scale(img, "x200"))
+  img<<-magick::image_convert(magick::image_append(image_scale(img, "x200")),"jpeg")
 }
