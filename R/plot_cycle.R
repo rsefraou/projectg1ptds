@@ -7,6 +7,7 @@
 
 plot_cycle <- function(df) {
 
+
   df <- df %>%
     na.omit() %>%
     dplyr::mutate(hour = lubridate::hour(date)) %>%
@@ -34,17 +35,15 @@ plot_cycle <- function(df) {
 
   moving_average <- data.frame(moving_average)
 
-  #a tester
-  #find the lowest point which is considered as the end of the night
-  #end_night <- (moving_average == min(moving_average))[1]
 
-  #ou
+  potential_end_nigh_vect <- which(night <- (moving_average == min(moving_average)))
 
-  #average of the lowest points
-  end_night <-
-    as.integer(mean(which(moving_average == min(moving_average))))
+  if(any(potential_end_nigh_vect)==1){
+    end_night <- max(potential_end_nigh_vect[!potential_end_nigh_vect>7])
+  } else {
+    end_night <-  max(potential_end_nigh_vect)
+  }
 
-  #create night and day period depending the end_night
 
   if (end_night < 7) {
     sleep_start <- 24 - (6 - end_night)
@@ -102,11 +101,10 @@ plot_cycle <- function(df) {
         fill = user_cycle
       ),
       alpha = 0.4
-    ) +
-    geom_line(data = df, aes(hour, comments)) +
+    ) + geom_line(data = df, aes(hour, comments)) +
     scale_fill_manual(values = alpha(c("#FEFE00", "#1B1C46"), 0.4)) +
     labs(
-      title = paste("Average daily activity of user:", "put user name here"),
+      title = paste("Average daily activity of the selected user"),
       subtitle = continent
     ) +
     xlab("hour of the day UTC +1") +
