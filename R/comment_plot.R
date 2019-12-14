@@ -4,6 +4,7 @@
 #' @param adapted dataframe
 #' @return plot and analysis of the comment
 #' @export
+
 comment_plot <- function(df) {
 
   #compute the total score received by each user
@@ -26,8 +27,8 @@ comment_plot <- function(df) {
     mutate(posneg = ifelse(total < 0, 1,0))
 
   by_user_score$user <- factor(by_user_score$user, levels = by_user_score$user[order(-by_user_score$total)])
-  by_user_score$dummy <- ifelse(by_user_score$total >0, "1", "0")
-  by_user_score$dummy <- as.factor(by_user_score$dummy)
+  by_user_score$result <- ifelse(by_user_score$total >0, "Positive", "Negative")
+  by_user_score$result <- as.factor(by_user_score$result)
 
 
   #create a barplot to plot the total score by user
@@ -53,9 +54,9 @@ comment_plot <- function(df) {
     ggplot(by_user_score, aes(
       x = user,
       y = total,
-      fill = dummy
+      fill = result
     )) +
-    scale_fill_manual(values = c("1" ="#006633" , "0" = "#c0392b"))+
+    scale_fill_manual(values = c("Positive" ="#006633" , "Negative" = "#c0392b"))+
     geom_bar(stat = "identity") +
     xlab("Pseudo of reddit user") +
     ylab("Total number of comment scores") +
