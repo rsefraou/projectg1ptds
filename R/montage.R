@@ -18,6 +18,6 @@ montage <- function(df) {
   images_list <- purrr::map(intake$value, read_image_wrapper)
   img <- magick::image_join(images_list)
 
+  magick::image_append(image_scale(img, "x200"))
 
-  img<<-magick::image_convert(magick::image_append(image_scale(img, "x200")),"jpeg")
 }
