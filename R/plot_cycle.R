@@ -22,12 +22,13 @@ plot_cycle <- function(df) {
 
   df[is.na(df)] <- 0
 
-  #Calculate the moving average of the last 6 hours ffor each hour
+  #Calculate the moving average of the last 6 hours for each hour
   moving_average <- NULL
   for (i in 0:4) {
     moving_average <- rbind(moving_average,
                             sum(rbind(df[(24 - 4 + i):24, ] , df[1:(1 + i), ])[,2])/6)
   }
+
   for (i in 0:18) {
     moving_average <-
       rbind(moving_average, sum(df[(1 + i):(6 + i), 2]) / 6)
@@ -35,15 +36,18 @@ plot_cycle <- function(df) {
 
   moving_average <- data.frame(moving_average)
 
+  #find min moving average position
+  potential_end_nigh_vect <- which(night <- (moving_average ==
+                                               min(moving_average)))
 
-  potential_end_nigh_vect <- which(night <- (moving_average == min(moving_average)))
-
-  if(any(potential_end_nigh_vect)==1){
-    end_night <- max(potential_end_nigh_vect[!potential_end_nigh_vect>7])
+  #chose which hour is the end of the night
+  if (any(potential_end_nigh_vect == 1)) {
+    end_night <- max(potential_end_nigh_vect[!potential_end_nigh_vect >7])
   } else {
-    end_night <-  max(potential_end_nigh_vect)
+    end_night <- max(potential_end_nigh_vect)
   }
 
+  #create start and end night point
 
   if (end_night < 7) {
     sleep_start <- 24 - (6 - end_night)
