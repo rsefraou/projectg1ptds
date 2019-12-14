@@ -8,9 +8,18 @@
 #' @export
 #' @examples
 #' Adresses<-reddit_urls_mod(search_terms = "federer", subreddit = "tennis", sort_by = "new", time_frame= "all")
+
 reddit_urls_mod<- function (search_terms = "", subreddit = "",
                             sort_by = "", time_frame= "")
 {
+
+  if (subreddit == ""){
+    subreddit <- NA
+  }
+
+  if (search_terms == ""){
+    search_terms <- NA
+  }
 
   if (!grepl("^[0-9A-Za-z]*$", subreddit) & !is.na(subreddit) ) {
     stop("subreddit must be a sequence of letter and number without special characters and spaces")
@@ -19,7 +28,7 @@ reddit_urls_mod<- function (search_terms = "", subreddit = "",
   regex_filter = ""
   cn_threshold = 0
   page_threshold = 15
-  wait_time = 2
+  wait_time = 1
 
   cached_links = data.frame(date = as.Date(character()),
                             num_comments = numeric(),
@@ -72,10 +81,10 @@ reddit_urls_mod<- function (search_terms = "", subreddit = "",
     search_JSON = tryCatch(RJSONIO::fromJSON(readLines(search_query,
                                                        warn = FALSE)), error = function(e) NULL)
     if (is.null(search_JSON)) {
-      cat(paste("Cannot connect to the website, skipping...\n"))
-      next
-    }
-    else {
+      stop(paste("Unable to connect to reddit website or invalid subreddit entered"))
+    } else if (length(search_JSON$data$children)==0){
+      stop(paste("This search term returned no results or invalid subreddit entered"))
+    } else {
       contents = search_JSON[[2]]$children
       search_permalink = paste0("http://www.reddit.com",
                                 sapply(seq(contents), function(x) contents[[x]]$data$permalink))
