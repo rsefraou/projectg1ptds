@@ -7,7 +7,7 @@
 #' @export
 get_user_comments <-
   function(user = "",
-           page_threshold = 2,
+           page_threshold = 5,
            wait_time = 2) {
     if (is.na(user) | user == "") {
       stop("Please enter an user name")
@@ -88,7 +88,7 @@ get_user_comments <-
                               next_page)
 
         page_counter = page_counter + 1
-        incProgress(amount = 1/250)
+        incProgress(amount = 1/page_threshold)
         Sys.sleep(min(2, wait_time))
       }
 
