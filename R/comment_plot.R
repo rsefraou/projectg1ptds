@@ -20,7 +20,10 @@ comment_plot <- function(df) {
     tibble::as_tibble() %>%
     group_by(user) %>%
     summarize(total = sum(comment_score)) %>%
-    arrange(desc(total))
+    mutate(rank = percent_rank(total)) %>%
+    filter(rank > 0.95 | rank < 0.01) %>%
+    arrange(desc(total)) %>%
+    mutate(posneg = ifelse(total < 0, 1,0))
 
   by_user_score$user <- factor(by_user_score$user, levels = by_user_score$user[order(-by_user_score$total)])
 
@@ -43,25 +46,19 @@ comment_plot <- function(df) {
   #   )
   #
 
-
-
   hist_score <-
     ggplot(by_user_score, aes(
       x = user,
       y = total,
-      fill = ifelse(total < 0, 'green', 'red')
+      fill = total > 0
     )) +
-    geom_histogram(stat = "identity") +
-    scale_y_continuous(breaks = seq(ceiling(min(
-      by_user_score$total
-    ) / 10) * 10, ceiling(max(
-      by_user_score$total
-    ) / 10) * 10, 20)) +
-    xlab("pseudo of reddit user") +
+    geom_bar(stat = "identity") +
+    xlab("Pseudo of reddit user") +
     ylab("Total number of comment scores") +
-    theme_minimal() +
+    theme_classic() +
     theme(
       axis.text.x = element_text(angle = 90),
+      axis.text.y = element_blank(),
       legend.position = "none",
       axis.text = element_text(size = 8)
     )
