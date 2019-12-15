@@ -1,19 +1,19 @@
 # Load all the required libraries for the package, display them in an alphabetical order
-
+library("shiny")
 
 # Define UI for our application, we decided to use a navbar at the top
-shiny::shinyUI(shiny::navbarPage(
+shinyUI(navbarPage(
   inverse = TRUE,
   "Reddit Analyser",
 
-# First Page - Intro, where we present the project
-  shiny::tabPanel(
+  # First Page - Intro, where we present the project
+  tabPanel(
     "Welcome!",
     # the theme we chose for our application
-    shiny::includeCSS("style.css"),
+    includeCSS("style.css"),
     #  includeCSS("box.css"),
     #  includeScript("main.js"),
-    shiny::fluidPage(
+    fluidPage(
       h1("Welcome to our Reddit analysing tool!"),
       br(),
       br(),
@@ -29,32 +29,32 @@ shiny::shinyUI(shiny::navbarPage(
       br(),
       br(),
       div(p(strong(
-          "Built by Rita Sefraoui Tahiri, Leonard Philippossian, Alexandre Schroeter, Simon Fornerod and David Pitteloud using RStudio."
-        ),
-        style = "text-align: right;",
+        "Built by Rita Sefraoui Tahiri, Leonard Philippossian, Alexandre Schroeter, Simon Fornerod and David Pitteloud using RStudio."
+      ),
+      style = "text-align: right;",
       )),
 
     )
   ),
 
   # Second Page  - Downloads page where user may download db
-  shiny::navbarMenu(
+  navbarMenu(
     "Downloads",
     #first subsection of the section downloads, to target reddit content
-    shiny::tabPanel("Reddit content",
-             shiny::fluidPage(
+    tabPanel("Reddit content",
+             fluidPage(
                h3("Here is where you may download data directly from the reddit API"),
                br(),
-               shiny::sidebarLayout(
+               sidebarLayout(
                  position = "right",
-                 shiny::sidebarPanel(
+                 sidebarPanel(
                    style = "background: rgba(255, 255, 255, 0)",
-                   shiny::wellPanel(
+                   wellPanel(
                      style = "background: rgba(192, 57, 43, 0.5)",
                      # different parameters that define the scrapping
-                     shiny::textInput("search", "What are you interested in?", value = "Greta"),
-                     shiny::textInput("subreddit", "Select an existing subreddit", value = "news"),
-                     shiny::selectInput(
+                     textInput("search", "What are you interested in?", value = "Greta"),
+                     textInput("subreddit", "Select an existing subreddit", value = "news"),
+                     selectInput(
                        "sortby",
                        "How do you want to sort your data by?",
                        choices = c(
@@ -67,7 +67,7 @@ shiny::shinyUI(shiny::navbarPage(
                        selected = "Comments"
                      ),
 
-                     shiny::selectInput(
+                     selectInput(
                        "timeframe",
                        "Select a time frame",
                        choices = c(
@@ -80,40 +80,40 @@ shiny::shinyUI(shiny::navbarPage(
                        selected = "week"
                      ),
 
-                     shiny::actionButton(class="btn", "load1", "Download"),
-                     shiny::actionButton(class="btn","display1", "Show table")
+                     actionButton(class="btn", "load1", "Download"),
+                     actionButton(class="btn","display1", "Show table")
 
                    )
                  ),
-                 shiny::mainPanel(shiny::uiOutput("id1"),
+                 mainPanel(shiny::uiOutput("id1"),
 
-                          shinycssloaders::withSpinner(DT::dataTableOutput("download1",width = "auto"), type = 4, color="#c0392b")
-                 )
+                           withSpinner(DT::dataTableOutput("download1",width = "auto"), type = 4, color="#c0392b")
+                 ))
 
              )),
     # second subsection of the section downloads, to gather user information
-    shiny::tabPanel("Stalking?",
-              shiny::fluidPage(
+    tabPanel("Stalking?",
+             fluidPage(
                br(),
                br(),
                h3("Welcome to the second downloading option!!"),
                br(),
-               shiny::sidebarLayout(
+               sidebarLayout(
                  position = "right",
-                 shiny::sidebarPanel(
+                 sidebarPanel(
                    style = "background: rgba(255, 255, 255, 0)",
-                   shiny::wellPanel(
+                   wellPanel(
                      style = "background: rgba(192, 57, 43, 0.5)",
-                                # Just enter the username to scrap its info
-                     shiny::textInput("user", "Enter a username"),
+                     # Just enter the username to scrap its info
+                     textInput("user", "Enter a username"),
 
-                     shiny::actionButton(class="btn","load2", "Stalk!"),
-                     shiny::actionButton(class="btn","display2", "Show table")
+                     actionButton(class="btn","load2", "Stalk!"),
+                     actionButton(class="btn","display2", "Show table")
 
-                              )),
-                 shiny::mainPanel(shiny::uiOutput("id2"),
+                   )),
+                 mainPanel(shiny::uiOutput("id2"),
 
-                      shinycssloaders::withSpinner(DT::dataTableOutput("download2",width = "auto"), type = 4, color="#c0392b")
+                           withSpinner(DT::dataTableOutput("download2",width = "auto"), type = 4, color="#c0392b")
                  ))
              ))
   ),
@@ -122,23 +122,23 @@ shiny::shinyUI(shiny::navbarPage(
 
 
   # Third Page  - Main section where the content of reddit will be analysed
-shiny::tabPanel("Inside Reddit",
-            shiny::fluidPage(
+  tabPanel("Inside Reddit",
+           fluidPage(
              h3("Here are different possible analysis on the content"),
              p(
                "Each possible section provides a different analytical perspective of Reddit Content!"
              ),
-             shiny::sidebarLayout(
+             sidebarLayout(
                position = "right",
-               shiny::sidebarPanel(
+               sidebarPanel(
                  style = "background: rgba(255, 255, 255, 0)",
 
 
-                 shiny::wellPanel(
+                 wellPanel(
                    style = "background: rgba(192, 57, 43, 0.5)",
-                   shiny::fileInput("file", NULL, accept = ".csv"),
+                   fileInput("file", NULL, accept = ".csv"),
                    # Different options to choose what analysis should be displayed
-                   shiny::radioButtons(
+                   radioButtons(
                      "col",
                      "Switch Plot",
                      choices =  c("Where is it trending?", "Who is the most popular?", "Gallery of pictures","Wordcloud","Sentiment analysis"),
@@ -146,44 +146,44 @@ shiny::tabPanel("Inside Reddit",
 
                    ),
                    # Supplementary output shown only if the mentionned parameters is selected
-                   shiny::conditionalPanel("input.col == 'Sentiment analysis'",
-                          shinycssloaders::withSpinner(DT::dataTableOutput("counttable"), type = 4,color="#c0392b"))
+                   conditionalPanel("input.col == 'Wordcloud'",
+                                    withSpinner(DT::dataTableOutput("table"), type = 4,color="#c0392b"))
 
 
-               )),
+                 )),
 
 
-              shiny::mainPanel(
-                # Wordcloud output
-                shiny::conditionalPanel(
-                 "input.col == 'Wordcloud'",
-                 shinycssloaders::withSpinner(
-                     wordcloud2::wordcloud2Output("wordcloud"), type = 4, color="#c0392b")
+               mainPanel(
+                 # Wordcloud output
+                 conditionalPanel(
+                   "input.col == 'Wordcloud'",
+                   withSpinner(
+                     wordcloud2Output("wordcloud"), type = 4, color="#c0392b")
                  )
 
                  ,
 
                  # Sentiment analysis
-                 shiny::conditionalPanel("input.col == 'Sentiment analysis'", shinycssloaders::withSpinner(
-                   plotly::plotlyOutput("redditsentiment"),
+                 conditionalPanel("input.col == 'Sentiment analysis'", withSpinner(
+                   plotlyOutput("redditsentiment"),
                    type = 4,
                    color = "#c0392b"
 
 
                  )),
                  # A map that shows where the subject is most related to
-                 shiny::conditionalPanel(
+                 conditionalPanel(
                    condition = "input.col == 'Where is it trending?'",
-                   shinycssloaders::withSpinner(leaflet::leafletOutput("mymap"), type = 4, color = "#c0392b")
+                   withSpinner(leafletOutput("mymap"), type = 4, color = "#c0392b")
                  ),
                  # An analysis of comments, and calculation of who get the most vote
-                shiny::conditionalPanel(condition = "input.col == 'Who is the most popular?'", shinycssloaders::withSpinner(
-                  plotly::plotlyOutput("histcomment"), type = 4, color = "#c0392b"
+                 conditionalPanel(condition = "input.col == 'Who is the most popular?'", withSpinner(
+                   plotlyOutput("histcomment"), type = 4, color = "#c0392b"
                  )),
                  # Display of pictures that were posted in the subreddit
-                 shiny::conditionalPanel(
+                 conditionalPanel(
                    condition = "input.col == 'Gallery of pictures'",
-                   shinycssloaders::withSpinner(imageOutput("img"), type = 4, color = "#c0392b")
+                   withSpinner(imageOutput("img"), type = 4, color = "#c0392b")
                  )
 
 
@@ -192,17 +192,17 @@ shiny::tabPanel("Inside Reddit",
            )),
 
   # Fourth page - Analysis on specified users
-  shiny::tabPanel("Track users!",
-           shiny::fluidPage(
-             shiny::sidebarLayout(
+  tabPanel("Track users!",
+           fluidPage(
+             sidebarLayout(
                position = "right",
-               shiny::sidebarPanel(
+               sidebarPanel(
                  style = "background: rgba(255, 255, 255, 0)",
-                 shiny::wellPanel(
+                 wellPanel(
                    style = "background: rgba(192, 57, 43, 0.5)",
-                   shiny::fileInput("file2", NULL, accept = ".csv"),
+                   fileInput("file2", NULL, accept = ".csv"),
                    #define the choice of output
-                   shiny::radioButtons(
+                   radioButtons(
                      "col1",
                      "Switch Plot",
                      choices = c("Where are you?", "In a good mood?", "What is he saying?"),
@@ -210,21 +210,21 @@ shiny::tabPanel("Inside Reddit",
                    )
                  )
                ),
-               shiny::mainPanel(
+               mainPanel(
                  # First plot that guess where a user potentially lives
-                 shiny::conditionalPanel(condition = "input.col1 == 'Where are you?'", shinycssloaders::withSpinner(
-                   shiny::plotOutput("plotcycle"), type = 4, color = "#c0392b"
+                 conditionalPanel(condition = "input.col1 == 'Where are you?'", withSpinner(
+                   plotOutput("plotcycle"), type = 4, color = "#c0392b"
                  )),
                  # Second output whihc is a plot about sentiment analysis of comment
-                 shiny::conditionalPanel(condition = "input.col1 == 'In a good mood?'", shinycssloaders::withSpinner(
-                   plotly::plotlyOutput("usersentiment"),
+                 conditionalPanel(condition = "input.col1 == 'In a good mood?'", withSpinner(
+                   plotlyOutput("usersentiment"),
                    type = 4,
                    color = "#c0392b"
                  )),
-                 shiny::conditionalPanel( condition =
+                 conditionalPanel( condition =
                                      "input.col1 == 'What is he saying?'",
-                                     shinycssloaders::withSpinner(
-                                     wordcloud2::wordcloud2Output("wordcloud_user"), type = 4, color="#c0392b")),
+                                   withSpinner(
+                                     wordcloud2Output("wordcloud_user"), type = 4, color="#c0392b")),
                )
 
 
