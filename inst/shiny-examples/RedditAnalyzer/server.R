@@ -233,4 +233,28 @@ For a few years Reddit has became more and more popular in Europe. If your downl
   output$usersentiment <- renderPlotly({
     projectg1ptds::sentiments_per_hour(df4())
   })
+
+  # Create a wordcloud for the user
+
+  output$wordcloud_user <- renderWordcloud2({
+
+    df <-df4() %>% na.omit()
+
+    df$comment <- projectg1ptds::cleaning_text_function(pull(df[,6]))
+
+    word_counts <- df %>%
+      tibble::as_tibble() %>%
+      tidytext::unnest_tokens(word, comment) %>%
+      dplyr::filter(is.na(as.numeric(word))) %>%
+      dplyr::anti_join(stop_words, by = "word") %>%
+      dplyr::count(word, sort = TRUE)
+
+    wordcloud2(word_counts, size=1.6,
+               shape="circle",
+               fontFamily = "Courier",
+               color= rep_len(c("red","orange","black","grey"),
+                              nrow(word_counts))
+    )
+  })
+
 })

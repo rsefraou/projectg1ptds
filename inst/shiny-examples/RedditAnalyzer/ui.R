@@ -205,7 +205,7 @@ shinyUI(navbarPage(
                    radioButtons(
                      "col1",
                      "Switch Plot",
-                     choices = c("Where are you?", "In a good mood?"),
+                     choices = c("Where are you?", "In a good mood?", "What is he saying?"),
                      selected = "Where are you?"
                    )
                  )
@@ -220,7 +220,12 @@ shinyUI(navbarPage(
                    plotlyOutput("usersentiment"),
                    type = 4,
                    color = "#c0392b"
-                 ))),
+                 )),
+                 conditionalPanel( condition =
+                                     "input.col1 == 'What is he saying?'",
+                                   withSpinner(
+                                     wordcloud2Output("wordcloud_user"), type = 4, color="#c0392b")),
+               )
 
 
              )
