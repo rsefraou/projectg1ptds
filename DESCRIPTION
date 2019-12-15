@@ -37,14 +37,14 @@ Imports:
     timevis (>= 0.5),
     tmap (>= 2.3-1),
     visNetwork (>= 2.0.9),
-    vroom (>= 1.0.2),
-    wordcloud2 (>= 0.2.1)
+    vroom (>= 1.0.2)
 Depends:
     fontawesome (>= 0.1.0),
     shiny (>= 1.4.0),
     shinycssloaders (>= 0.2.0),
     tidytext (>= 0.2.2),
     tidyverse (>= 1.3.0),
+    wordcloud2 (>= 0.2.1),
     R (>= 3.1.0)
 License: Unlicensed
 Encoding: UTF-8
