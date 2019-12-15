@@ -1,3 +1,5 @@
+
+
 # Increase the size of possible file input in this shiny app
 
 options(shiny.maxRequestSize = 50 * 1024 ^ 2)
@@ -128,7 +130,7 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 
 # Word search table created with the help of the function above
 
-  output$table <- DT::renderDataTable({
+  output$counttable <- DT::renderDataTable({
     req(df3)
     DT::datatable(word_counts(), options = list(lengthMenu = c(10, 20, 50), pageLength = 10),
                   rownames = FALSE, colnames = c("Word", "Count"), class = 'compact',
