@@ -13,15 +13,15 @@ shinyServer(function(input, output) {
 
 # First function to scrape data from reddit
 
-  df1 <- eventReactive(input$load1, {
-    scrapping_function(input$search,
+  df1 <- shiny::eventReactive(input$load1, {
+    projectg1ptds::scrapping_function(input$search,
                        input$subreddit,
                        input$sortby,
                        input$timeframe)
   })
 
 # Second function to create a csv from the content gathered above
-  observeEvent(input$load1, (write.csv(
+  shiny::observeEvent(input$load1, (readr::write.csv(
     df1(),
     file = paste0(
       input$search,
@@ -36,17 +36,17 @@ shinyServer(function(input, output) {
   )))
 
 # Scrap the data relative to the user
-  df2 <- eventReactive(input$load2, {
-    get_user_comments(input$user)
+  df2 <- shiny::eventReactive(input$load2, {
+    projectg1ptds::get_user_comments(input$user)
   })
 
 # Create a csv file for the user data
-  observeEvent(input$load2, (write.csv(df2(), file = paste0(
+  shiny::observeEvent(input$load2, (readr::write.csv(df2(), file = paste0(
     input$user, ".csv"
   ))))
 
 # Text to explain how difficult downloading can be
-  output$id1 <- renderUI(
+  output$id1 <- shiny::renderUI(
     p(
       "As you may know, downloading is not always an easy task! It may take some time and be quite irritating.
 To avoid such a situation, here is a bit of reading! While we are scrapping our data from the social media Reddit, why don't we talk about it?
@@ -58,7 +58,7 @@ For a few years Reddit has became more and more popular in Europe. If your downl
   )
 
 # Print a part of the dataframe to show user what has be downloaded
-  printdf1<- eventReactive(input$display1, {
+  printdf1<- shiny::eventReactive(input$display1, {
     df1()[13:16]
   })
 
@@ -70,7 +70,7 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 
 # Text to explain how cool stalking is
 
-  output$id2 <- renderUI(
+  output$id2 <- shiny::renderUI(
     p(
       "As we are done with the formal aspect, welcome to the fun part!
     We are sure that most of us like to check what how our friends are interacting on social media!
@@ -81,7 +81,7 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 
 # Function to show what data are collected from an user
 
-  printdf2<- eventReactive(input$display2, {
+  printdf2<- shiny::eventReactive(input$display2, {
     df2()
   })
 
@@ -95,11 +95,11 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 
 # Upload of a file for the analysis
 
-  df3 <- reactive({
-    req(input$file)
+  df3 <- shiny::reactive({
+    shiny::req(input$file)
     ext <- tools::file_ext(input$file$filename)
 
-    df<- as.tibble(vroom::vroom(input$file$datapath, delim = ",")[, -1])
+    df<- tibble::as_tibble(vroom::vroom(input$file$datapath, delim = ",")[, -1])
 
     return(df)
   })
@@ -108,17 +108,17 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 # Word counts is a fonction counting word occurence
 
 
-  word_counts <- reactive({
+  word_counts <- shiny::reactive({
 
     word <- c("ll", "ve", "does", "http")
     lexicon <- c("mine", "mine", "mine", "mine")
     mystopwords <- data.frame(word, lexicon)
     stop_words <- rbind(stop_words, mystopwords)
 
-    req(input)
+   shiny::req(input)
 
     df3() %>%
-      tibble::as_tibble() %>%
+      tibble::as.tibble() %>%
       tidytext::unnest_tokens(word, comment) %>%
       dplyr::filter(is.na(as.numeric(word)))%>%
       dplyr::anti_join(stop_words, by = "word") %>%
@@ -131,7 +131,7 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 # Word search table created with the help of the function above
 
   output$counttable <- DT::renderDataTable({
-    req(df3)
+    shiny::req(df3)
     DT::datatable(word_counts(), options = list(lengthMenu = c(10, 20, 50), pageLength = 10),
                   rownames = FALSE, colnames = c("Word", "Count"), class = 'compact',
                   caption = 'Common English words (stop words) are excluded')
@@ -139,8 +139,8 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 
 # Creation of the interactive wordcloud
 
-  output$wordcloud <- renderWordcloud2({
-   wordcloud2(word_counts(), size = 1.6,
+  output$wordcloud <- wordcloud2::renderWordcloud2({
+   wordcloud2::wordcloud2(word_counts(), size = 1.6,
               shape ="circle",
               fontFamily = "Courier",
               color = rep_len(c("red", "orange", "black", "grey"),
@@ -173,9 +173,9 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 # Display of different pictures shown in a subreddit
 
 
-  output$img <- renderImage({
+  output$img <- shiny::renderImage({
 
-    req(input)
+    shiny::req(input)
     inkart <- df3()
 
     # Creation of an error message if there is no picture in the subreddit
@@ -189,7 +189,7 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 
     intake <- stringr::str_match(inkart$link, ".*jpg") %>% unique()
     intake <- intake[-1, ]
-    intake <- tibble::as_tibble(intake)
+    intake <- tibble::as.tibble(intake)
 
     images_list <- purrr::map(intake$value, magick::image_read)
     img <- magick::image_join(images_list)
@@ -199,7 +199,7 @@ For a few years Reddit has became more and more popular in Europe. If your downl
     imagei <<- magick::image_convert((img), "jpeg")
 
     tmpfile<-imagei %>%
-      image_write(tempfile(fileext='jpg'), format = 'jpg')
+      magick::image_write(tempfile(fileext='jpg'), format = 'jpg')
     # Return a list
     list(src = tmpfile, contentType = "image/jpeg")
   })
@@ -207,11 +207,11 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 
 # Input of the database for the user analysis section
 
-  df4 <- reactive({
-    req(input$file2)
+  df4 <- shiny::reactive({
+    shiny::req(input$file2)
     ext <- tools::file_ext(input$file2$filename)
 
-    df <- tidyverse::as.tibble(vroom::vroom(input$file2$datapath, delim = ",")[, -1])
+    df <- tibble::as.tibble(vroom::vroom(input$file2$datapath, delim = ",")[, -1])
 
     return(df)
   })
@@ -233,7 +233,7 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 
   # Create a wordcloud for the user
 
-  output$wordcloud_user <- renderWordcloud2({
+  output$wordcloud_user <- wordcloud2::renderWordcloud2({
 
     df <-df4() %>% na.omit()
 
@@ -246,7 +246,7 @@ For a few years Reddit has became more and more popular in Europe. If your downl
       dplyr::anti_join(stop_words, by = "word") %>%
       dplyr::count(word, sort = TRUE)
 
-    wordcloud2(word_counts, size=1.6,
+    wordcloud2::wordcloud2(word_counts, size=1.6,
                shape="circle",
                fontFamily = "Courier",
                color= rep_len(c("red","orange","black","grey"),
