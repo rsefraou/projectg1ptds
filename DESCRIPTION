@@ -29,6 +29,7 @@ Imports:
     sf (>= 0.8-0),
     shiny (>= 1.4.0),
     shinycssloaders (>= 0.2.0),
+    shinythemes(>= 1.1.2),
     sparkline (>= 2.0),
     spData (>= 0.3.2),
     stopwords (>= 1.0), 
