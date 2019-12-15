@@ -87,8 +87,8 @@ shiny::shinyUI(shiny::navbarPage(
                  ),
                  shiny::mainPanel(shiny::uiOutput("id1"),
 
-                           withSpinner(DT::dataTableOutput("download1",width = "auto"), type = 4, color="#c0392b")
-                 ))
+                          shinycssloaders::withSpinner(DT::dataTableOutput("download1",width = "auto"), type = 4, color="#c0392b")
+                 )
 
              )),
     # second subsection of the section downloads, to gather user information
