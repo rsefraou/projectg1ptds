@@ -26,6 +26,3 @@ A \code{dataframe} with the scraping done
 \description{
 Scrapping urls
 }
-\examples{
-Adresses<-reddit_urls_mod(search_terms = "federer", subreddit = "tennis", sort_by = "new", time_frame= "all")
-}
