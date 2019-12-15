@@ -1,16 +1,4 @@
-# Load all the required libraries for the package, display them in an alphabetical order
-# library("leaflet")
-# library("magick")
-# library("plotly")
-  library("projectg1ptds")
-# library("sf")
-# library("shiny")
-# library("spData")
-# library("stringi")
-# library("tidytext")
-# library("tidyverse")
-# library("tmap")
-# library("vroom")
+
 
 # Increase the size of possible file input in this shiny app
 

@@ -1,21 +1,4 @@
 # Load all the required libraries for the package, display them in an alphabetical order
-# library("DT")
-# library("glue")
-# library("leaflet")
-# library("fontawesome")
-# library("plotly")
-# library("shiny")
-# library("shinycssloaders")
-# library("shinythemes")
-# library("sparkline")
-# library("tidygraph")
-# library("tidytext")
-# library("tidyverse")
-# library("timevis")
-# library("tmap")
-# library("visNetwork")
-# library("wordcloud2")
-
 
 
 # Define UI for our application, we decided to use a navbar at the top
