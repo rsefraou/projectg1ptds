@@ -40,6 +40,9 @@ map_reddit<-function(df){
     inner_join(countries, by = "word") %>%
     plyr::count()
   # i guess the problem in shiny may come from this line
+  if(dim(contenu_tokens)[1]== 0){
+    stop("There is no mention of any countries in this dataset")
+  }
 
   contenu_tokens_2 <- contenu_tokens[,19:20]
 
