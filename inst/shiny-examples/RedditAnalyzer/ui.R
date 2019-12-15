@@ -146,8 +146,8 @@ shinyUI(navbarPage(
 
                    ),
                    # Supplementary output shown only if the mentionned parameters is selected
-                   conditionalPanel("input.col == 'Sentiment analysis'",
-                                   withSpinner(DT::dataTableOutput("counttable"), type = 4,color="#c0392b"))
+                   conditionalPanel("input.col == 'Wordcloud'",
+                                   withSpinner(DT::dataTableOutput("table"), type = 4,color="#c0392b"))
 
 
                )),
