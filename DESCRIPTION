@@ -13,7 +13,7 @@ Maintainer: Rita Sefraoui <rita.sefraouitahiri@unil.ch>
 Description: This package allows us to scrap and clean data from Reddit for text mining utilizations
 Imports: 
     dplyr (>= 0.8.3),
-    DT (>=0.10),
+    DT (>= 0.10),
     fontawesome (>= 0.1.0),
     ggplot2 (>= 3.2.1),
     glue (>= 1.3.1),
