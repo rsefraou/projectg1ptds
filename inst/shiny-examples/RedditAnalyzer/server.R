@@ -149,22 +149,22 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 
 # Sentiment analysis on reddit content, more information about the function on the package
 
-  output$redditsentiment <- renderPlotly({
+  output$redditsentiment <- plotly::renderPlotly({
     projectg1ptds::plot_sentiments_reddit(df3())
   })
 
 
 # Calculation of score of the comment by user on a certain topic
 
-  output$histcomment <- renderPlotly({
+  output$histcomment <- plotly::renderPlotly({
     projectg1ptds::comment_plot(df3())
   })
 
 
 # Map of where the subject chosen is more trending or at leat mentionned
 
-  output$mymap <- renderLeaflet({
-    tmap_leaflet(projectg1ptds::map_reddit(df3()))
+  output$mymap <- leaflet::renderLeaflet({
+    tmap::tmap_leaflet(projectg1ptds::map_reddit(df3()))
   })
 
 
@@ -209,7 +209,7 @@ For a few years Reddit has became more and more popular in Europe. If your downl
     req(input$file2)
     ext <- tools::file_ext(input$file2$filename)
 
-    df <- as.tibble(vroom::vroom(input$file2$datapath, delim = ",")[, -1])
+    df <- tidyverse::as.tibble(vroom::vroom(input$file2$datapath, delim = ",")[, -1])
 
     return(df)
   })
@@ -225,7 +225,7 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 
 
 # Plot of user sentiment and this time not reddit content
-  output$usersentiment <- renderPlotly({
+  output$usersentiment <- plotly::renderPlotly({
     projectg1ptds::sentiments_per_hour(df4())
   })
 

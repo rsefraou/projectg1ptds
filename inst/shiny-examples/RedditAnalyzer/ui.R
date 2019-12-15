@@ -165,7 +165,7 @@ shinyUI(navbarPage(
 
                  # Sentiment analysis
                  conditionalPanel("input.col == 'Sentiment analysis'", withSpinner(
-                   plotlyOutput("redditsentiment"),
+                   plotly::plotlyOutput("redditsentiment"),
                    type = 4,
                    color = "#c0392b"
 
@@ -174,11 +174,11 @@ shinyUI(navbarPage(
                  # A map that shows where the subject is most related to
                  conditionalPanel(
                    condition = "input.col == 'Where is it trending?'",
-                   withSpinner(leafletOutput("mymap"), type = 4, color = "#c0392b")
+                   withSpinner(leaflet::leafletOutput("mymap"), type = 4, color = "#c0392b")
                  ),
                  # An analysis of comments, and calculation of who get the most vote
                  conditionalPanel(condition = "input.col == 'Who is the most popular?'", withSpinner(
-                   plotlyOutput("histcomment"), type = 4, color = "#c0392b"
+                  plotly::plotlyOutput("histcomment"), type = 4, color = "#c0392b"
                  )),
                  # Display of pictures that were posted in the subreddit
                  conditionalPanel(
@@ -217,7 +217,7 @@ shinyUI(navbarPage(
                  )),
                  # Second output whihc is a plot about sentiment analysis of comment
                  conditionalPanel(condition = "input.col1 == 'In a good mood?'", withSpinner(
-                   plotlyOutput("usersentiment"),
+                   plotly::plotlyOutput("usersentiment"),
                    type = 4,
                    color = "#c0392b"
                  )),
