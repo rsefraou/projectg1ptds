@@ -64,8 +64,8 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 
 
   output$download1 <- DT::renderDataTable({
-    DT::datatable(printdf1(),options = list(lengthMenu = c(10, 20, 50),autoWidth=TRUE,
-                                       scrollX = TRUE,scrollY=TRUE, pageLength = 10),
+    DT::datatable(printdf1(), options = list(lengthMenu = c(10, 20, 50), autoWidth=TRUE,
+                                       scrollX = TRUE, scrollY=TRUE, pageLength = 10),
                   rownames = FALSE,  class="compact")})
 
 # Text to explain how cool stalking is
@@ -99,8 +99,7 @@ For a few years Reddit has became more and more popular in Europe. If your downl
     req(input$file)
     ext <- tools::file_ext(input$file$filename)
 
-    df<-
-      as.tibble(vroom::vroom(input$file$datapath, delim = ",")[, -1])
+    df<- as.tibble(vroom::vroom(input$file$datapath, delim = ",")[, -1])
 
     return(df)
   })
@@ -117,6 +116,7 @@ For a few years Reddit has became more and more popular in Europe. If your downl
     stop_words <- rbind(stop_words, mystopwords)
 
     req(input)
+
     df3() %>%
       tibble::as_tibble() %>%
       tidytext::unnest_tokens(word, comment) %>%
@@ -140,10 +140,10 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 # Creation of the interactive wordcloud
 
   output$wordcloud <- renderWordcloud2({
-   wordcloud2(word_counts(), size=1.6,
-              shape="circle",
+   wordcloud2(word_counts(), size = 1.6,
+              shape ="circle",
               fontFamily = "Courier",
-              color= rep_len(c("red","orange","black","grey"),
+              color = rep_len(c("red", "orange", "black", "grey"),
                              nrow(word_counts()))
              )
   })
@@ -176,7 +176,7 @@ For a few years Reddit has became more and more popular in Europe. If your downl
   output$img <- renderImage({
 
     req(input)
-    inkart<-df3()
+    inkart <- df3()
 
     # Creation of an error message if there is no picture in the subreddit
 
@@ -211,8 +211,7 @@ For a few years Reddit has became more and more popular in Europe. If your downl
     req(input$file2)
     ext <- tools::file_ext(input$file2$filename)
 
-    df <-
-      as.tibble(vroom::vroom(input$file2$datapath, delim = ",")[, -1])
+    df <- as.tibble(vroom::vroom(input$file2$datapath, delim = ",")[, -1])
 
     return(df)
   })
