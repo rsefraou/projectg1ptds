@@ -1,6 +1,8 @@
 # Load all the required libraries for the package, display them in an alphabetical order
+
 # library("shiny")
 # library("projectg1ptds")
+
 # Define UI for our application, we decided to use a navbar at the top
 shinyUI(navbarPage(
   inverse = TRUE,
