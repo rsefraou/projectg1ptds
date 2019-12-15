@@ -1,0 +1,129 @@
+/*Use Courier font throughout app*/
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,500");
+@import url("https://fonts.googleapis.com/css?family=Inconsolata");
+  
+body {
+  background: white;
+}  
+  
+* {
+  font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+	font-family: 'Arial Narrow';
+	color: #c0392b;
+	font: bold;
+	font-size: 48px;
+	text-align: center;
+}
+
+h3 {
+	font-family: 'Arial Narrow';
+	color: #c0392b;
+	font-size: 28px;
+}
+
+p {
+	font-size: 14px;
+}
+
+/*Colour hyperlinks*/
+a {
+  color: #c0392b;s
+}
+
+a:hover {
+  color: #858B8E;
+}
+
+/*Colour of nav bar Title*/
+.navbar-default{
+  color: white;
+  background: #c0392b;
+  border: #c0392b;
+}
+
+.navbar-default .navbar-brand{
+  color: white;
+  font-weight: bold;
+}
+
+.navbar-default .navbar-nav{
+  color: white;
+  background: #c0392b;
+}
+
+/*Colour of nav bar tabs when hovering and active*/
+.navbar-default .navbar-nav > .active > a, 
+                           .navbar-default .navbar-nav > .active > a:focus, 
+                           .navbar-default .navbar-nav > .active > a:hover {
+                                color: #c0392b;
+                                font-weight: bold;
+                                background: white;
+                            }
+
+/*Change appearance of inputbox*/
+input[type="text"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* Styling input */
+  border: 1px solid black;
+  box-shadow: #c0392b;
+  background-color: white;
+  transition: all .15s ease;
+}
+
+/*Change appearance of button*/
+.btn{
+	color: #111 !important;
+	padding: 5px;
+	text-transform: uppercase;
+	background: #ffffff;
+	border: 2px solid #111 !important;
+	border-radius: 10px;
+	transition: all 0.3s ease 0s;
+}
+
+.btn:hover{
+	color: #c0392b !important;
+	border-radius: 50px;
+	border-color: #c0392b !important;
+	transition: all 0.3s ease 0s;
+}
+
+.form-control{
+	border: 2px solid #111 !important;
+	border-radius: 10px;
+}
+
+/*Change appearance of radiobutton*/
+input[type='radio']:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: #d1d3d1;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+}
+
+input[type='radio']:checked:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: #c0392b;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+}
