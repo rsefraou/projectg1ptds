@@ -173,11 +173,12 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 # Display of different pictures shown in a subreddit
 
 
-  imagei <- reactive({
+  output$img <- renderImage({
+
     req(input)
     inkart<-df3()
 
-# Creation of an error message if there is no picture in the subreddit
+    # Creation of an error message if there is no picture in the subreddit
 
     inkart <- inkart[unlist(lapply(1:nrow(inkart), function(x) grepl("*.jpg$", inkart[x,16]))),]
 
@@ -197,11 +198,8 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 
     imagei <<- magick::image_convert((img), "jpeg")
 
-  })
-
-  output$img <- renderImage({
-    tmpfile<-imagei()%>%
-    image_write(tempfile(fileext='jpg'), format = 'jpg')
+    tmpfile<-imagei %>%
+      image_write(tempfile(fileext='jpg'), format = 'jpg')
     # Return a list
     list(src = tmpfile, contentType = "image/jpeg")
   })
