@@ -14,11 +14,8 @@ Description: This package allows us to scrap and clean data from Reddit for text
 Imports: 
     DT (>= 0.10),
     glue (>= 1.3.1),
-    leaflet (>= 2.0.3),
     lubridate (>= 1.7.4),
-    magick (>= 2.2), 
     magrittr (>= 1.5), 
-    plotly (>= 4.9.1),
     Rcpp (>= 1.0.3),
     RColorBrewer (>= 1.1-2),
     RedditExtractoR (>= 2.1.5),
@@ -35,16 +32,19 @@ Imports:
     tidytext (>= 0.2.2),
     tidyverse (>= 1.3.0),
     timevis (>= 0.5),
-    tmap (>= 2.3-1),
     visNetwork (>= 2.0.9),
     vroom (>= 1.0.2)
 Depends:
+    tmap (>= 2.3-1),
+    magick (>= 2.2), 
+    leaflet (>= 2.0.3),
     fontawesome (>= 0.1.0),
     shiny (>= 1.4.0),
     shinycssloaders (>= 0.2.0),
     tidytext (>= 0.2.2),
     tidyverse (>= 1.3.0),
     wordcloud2 (>= 0.2.1),
+    plotly (>= 4.9.1),
     R (>= 3.1.0)
 License: Unlicensed
 Encoding: UTF-8
