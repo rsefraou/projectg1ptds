@@ -5,10 +5,7 @@
 #' @param wait_time  used to specify the waiting time between scrappings.
 #' @return A dataframe with the scraping done
 #' @export
-get_user_comments <-
-  function(user = "",
-           page_threshold = 5,
-           wait_time = 2) {
+get_user_comments <- function(user = "", page_threshold = 5, wait_time = 2) {
     if (is.na(user) | user == "") {
       stop("Please enter an user name")
     }

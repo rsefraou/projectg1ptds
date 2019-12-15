@@ -10,7 +10,7 @@ map_reddit<-function(df){
   data("World")
   b <- as.tibble(World)
   spData <- b %>% mutate(name = tolower(name))
-  countries <- spData[,2] %>%mutate(word=name)
+  countries <- spData[,2] %>% mutate(word=name)
 
 
 
@@ -40,14 +40,16 @@ map_reddit<-function(df){
     inner_join(countries, by = "word") %>%
     plyr::count()
   # i guess the problem in shiny may come from this line
-  if(dim(contenu_tokens)[1]== 0){
+  if(dim(contenu_tokens)[1] == 0){
     stop("There is no mention of any countries in this dataset")
   }
 
-  contenu_tokens_2 <- contenu_tokens[,19:20]
+  contenu_tokens_2 <- contenu_tokens[, 19:20]
 
 
-  clean_country <- contenu_tokens_2%>%dplyr:: group_by(name) %>% dplyr::summarise("frequency"=sum(freq))
+  clean_country <- contenu_tokens_2 %>%
+    dplyr::group_by(name) %>%
+    dplyr::summarise("frequency" = sum(freq))
 
   #deal with capital letter
 
@@ -56,15 +58,15 @@ map_reddit<-function(df){
     substr(x, 1, 1) <- toupper(substr(x, 1, 1))
     x
   }
-  clean_country$name<- firstup(clean_country$name)
+  clean_country$name <- firstup(clean_country$name)
   for (i in c(1: length(clean_country$name))){
-    if (clean_country$name[i]=="United states"){
-      clean_country$name[i]<-"United States"
+    if (clean_country$name[i] == "United states"){
+      clean_country$name[i] <- "United States"
     }
   }
 
   for (i in c(1: length(clean_country$name))){
-    if (clean_country$name[i]=="United kingdom"){
+    if (clean_country$name[i] == "United kingdom"){
       clean_country$name[i]<-"United Kingdom"
     }
   }
@@ -72,16 +74,16 @@ map_reddit<-function(df){
   # add the variable to the sp World data frame
 
   name_order <- data.frame(name =  as.character(World$name))
-  clean_country$name<-clean_country$name%>%as.factor()
+  clean_country$name <- clean_country$name%>%as.factor()
   final_joint <- left_join(name_order, clean_country, by = "name" )
 
   World$frequency <- final_joint$frequency
 
   #creation of the static map
-  map <- tm_shape(World)+
-    tm_fill(col="frequency")+
-    tmap_mode('view')+
-    tm_borders()+
+  map <- tm_shape(World) +
+    tm_fill(col="frequency") +
+    tmap_mode('view') +
+    tm_borders() +
     tm_basemap(server = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
 
   return(map)
