@@ -1,20 +1,20 @@
 # Load all the required libraries for the package, display them in an alphabetical order
-library("DT")
-library("glue")
-library("leaflet")
-library("fontawesome")
-library("plotly")
-library("shiny")
-library("shinycssloaders")
-library("shinythemes")
-library("sparkline")
-library("tidygraph")
-library("tidytext")
-library("tidyverse")
-library("timevis")
-library("tmap")
-library("visNetwork")
-library("wordcloud2")
+# library("DT")
+# library("glue")
+# library("leaflet")
+# library("fontawesome")
+# library("plotly")
+# library("shiny")
+# library("shinycssloaders")
+# library("shinythemes")
+# library("sparkline")
+# library("tidygraph")
+# library("tidytext")
+# library("tidyverse")
+# library("timevis")
+# library("tmap")
+# library("visNetwork")
+# library("wordcloud2")
 
 
 
@@ -22,7 +22,7 @@ library("wordcloud2")
 shinyUI(navbarPage(
   inverse = TRUE,
   "Reddit Analyser",
-  
+
 # First Page - Intro, where we present the project
   tabPanel(
     "Welcome!",
@@ -50,10 +50,10 @@ shinyUI(navbarPage(
         ),
         style = "text-align: right;",
       )),
-      
+
     )
   ),
-  
+
   # Second Page  - Downloads page where user may download db
   navbarMenu(
     "Downloads",
@@ -83,7 +83,7 @@ shinyUI(navbarPage(
                        ),
                        selected = "Comments"
                      ),
-                     
+
                      selectInput(
                        "timeframe",
                        "Select a time frame",
@@ -96,17 +96,17 @@ shinyUI(navbarPage(
                        ),
                        selected = "week"
                      ),
-                     
+
                      actionButton(class="btn", "load1", "Download"),
                      actionButton(class="btn","display1", "Show table")
-                     
+
                    )
                  ),
                  mainPanel(shiny::uiOutput("id1"),
-                           
+
                            withSpinner(DT::dataTableOutput("download1",width = "auto"), type = 4, color="#c0392b")
                  ))
-               
+
              )),
     # second subsection of the section downloads, to gather user information
     tabPanel("Stalking?",
@@ -123,21 +123,21 @@ shinyUI(navbarPage(
                      style = "background: rgba(192, 57, 43, 0.5)",
                                 # Just enter the username to scrap its info
                                 textInput("user", "Enter a username"),
-                                
+
                                 actionButton(class="btn","load2", "Stalk!"),
                                 actionButton(class="btn","display2", "Show table")
-                                
+
                               )),
                  mainPanel(shiny::uiOutput("id2"),
-                           
+
                            withSpinner(DT::dataTableOutput("download2",width = "auto"), type = 4, color="#c0392b")
                  ))
              ))
   ),
-  
-  
-  
-  
+
+
+
+
   # Third Page  - Main section where the content of reddit will be analysed
   tabPanel("Inside Reddit",
            fluidPage(
@@ -149,8 +149,8 @@ shinyUI(navbarPage(
                position = "right",
                sidebarPanel(
                  style = "background: rgba(255, 255, 255, 0)",
-                 
-                 
+
+
                  wellPanel(
                    style = "background: rgba(192, 57, 43, 0.5)",
                    fileInput("file", NULL, accept = ".csv"),
@@ -160,33 +160,33 @@ shinyUI(navbarPage(
                      "Switch Plot",
                      choices =  c("Where is it trending?", "Who is the most popular?", "Gallery of pictures","Wordcloud","Sentiment analysis"),
                      selected = "Where is it trending?"
-                    
+
                    ),
                    # Supplementary output shown only if the mentionned parameters is selected
                    conditionalPanel("input.col == 'Sentiment analysis'",
                                    withSpinner(DT::dataTableOutput("counttable"), type = 4,color="#c0392b"))
-                 
-                
+
+
                )),
 
-                                                
-               mainPanel( 
-                # Wordcloud output 
+
+               mainPanel(
+                # Wordcloud output
                  conditionalPanel(
                  "input.col == 'Wordcloud'",
                    withSpinner(
                      wordcloud2Output("wordcloud"), type = 4, color="#c0392b")
                  )
-                 
+
                  ,
-                  
-                 # Sentiment analysis 
+
+                 # Sentiment analysis
                  conditionalPanel("input.col == 'Sentiment analysis'", withSpinner(
                    plotlyOutput("redditsentiment"),
                    type = 4,
                    color = "#c0392b"
 
-                
+
                  )),
                  # A map that shows where the subject is most related to
                  conditionalPanel(
@@ -202,12 +202,12 @@ shinyUI(navbarPage(
                    condition = "input.col == 'Gallery of pictures'",
                    withSpinner(imageOutput("img"), type = 4, color = "#c0392b")
                  )
-                 
-                 
+
+
                )
              )
            )),
-  
+
   # Fourth page - Analysis on specified users
   tabPanel("Track users!",
            fluidPage(
@@ -218,7 +218,7 @@ shinyUI(navbarPage(
                  wellPanel(
                    style = "background: rgba(192, 57, 43, 0.5)",
                    fileInput("file2", NULL, accept = ".csv"),
-                   #define the choice of output 
+                   #define the choice of output
                    radioButtons(
                      "col1",
                      "Switch Plot",
@@ -232,14 +232,14 @@ shinyUI(navbarPage(
                  conditionalPanel(condition = "input.col1 == 'Where are you?'", withSpinner(
                    plotOutput("plotcycle"), type = 4, color = "#c0392b"
                  )),
-                 # Second output whihc is a plot about sentiment analysis of comment 
+                 # Second output whihc is a plot about sentiment analysis of comment
                  conditionalPanel(condition = "input.col1 == 'In a good mood?'", withSpinner(
                    plotlyOutput("usersentiment"),
                    type = 4,
                    color = "#c0392b"
                  ))),
-                 
-               
+
+
              )
            ))
 ))
