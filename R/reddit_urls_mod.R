@@ -6,8 +6,6 @@
 #' @param time_frame A \code{char} (character) used to specify if we look only at last week, last month, or all
 #' @return A \code{dataframe} with the scraping done
 #' @export
-#' @examples
-#' Adresses<-reddit_urls_mod(search_terms = "federer", subreddit = "tennis", sort_by = "new", time_frame= "all")
 reddit_urls_mod<- function (search_terms = "", subreddit = "",
                             sort_by = "", time_frame= "")
 {
