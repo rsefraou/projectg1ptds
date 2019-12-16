@@ -4,7 +4,6 @@
 #' @param adapted dataframe
 #' @return plot and analysis of the comment
 #' @export
-
 comment_plot <- function(df) {
 
 
