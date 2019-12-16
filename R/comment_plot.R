@@ -22,10 +22,7 @@ comment_plot <- function(df) {
   by_user_score$result <- ifelse(by_user_score$total >0, "Positive", "Negative")
   by_user_score$result <- as.factor(by_user_score$result)
 
-
   #create a barplot to plot the total score by user
-
-
 
   hist_score <-
     ggplot(by_user_score, aes(
@@ -49,5 +46,3 @@ comment_plot <- function(df) {
   return(hist_score_2)
 }
 
-
-comment_plot(df)
