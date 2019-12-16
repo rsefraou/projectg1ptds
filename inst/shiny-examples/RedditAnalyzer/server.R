@@ -21,7 +21,7 @@ shinyServer(function(input, output) {
   })
 
 # Second function to create a csv from the content gathered above
-  shiny::observeEvent(input$load1, (readr::write.csv(
+  shiny::observeEvent(input$load1, (utils::write.csv(
     df1(),
     file = paste0(
       input$search,
