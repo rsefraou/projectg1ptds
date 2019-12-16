@@ -11,12 +11,12 @@ comment_plot <- function(df) {
     tibble::as_tibble() %>%
     filter(!user == "[deleted]")%>%
     group_by(user) %>%
-    summarize(total = sum(comment_score)) %>%
+    summarize(total = sum(as.numeric(comment_score))) %>%
     mutate(rank = percent_rank(total)) %>%
     arrange(desc(total)) %>%
     mutate(posneg = ifelse(total < 0, 1,0))
 
-  by_user_score <- by_user_score[c(1:10,(nrow(by_user_score)-10):nrow(by_user_score)),]
+  by_user_score <- by_user_score[c(1:10, (nrow(as.numeric(by_user_score))-10):nrow(as.numeric(by_user_score))) , ]
 
   by_user_score$user <- factor(by_user_score$user, levels = by_user_score$user[order(-by_user_score$total)])
   by_user_score$result <- ifelse(by_user_score$total >0, "Positive", "Negative")
