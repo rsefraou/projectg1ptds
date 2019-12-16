@@ -110,8 +110,8 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 
   word_counts <- shiny::reactive({
 
-    word <- c("ll", "ve", "does", "http")
-    lexicon <- c("mine", "mine", "mine", "mine")
+    word <- c("ll", "ve", "does", "http", "subreddit","guy", "people", "doesn","didn","guys")
+    lexicon <- c("mine", "mine", "mine", "mine","mine", "mine", "mine", "mine", "mine", "mine")
     mystopwords <- data.frame(word, lexicon)
     stop_words <- rbind(stop_words, mystopwords)
 
