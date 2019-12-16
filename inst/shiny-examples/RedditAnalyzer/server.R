@@ -1,6 +1,4 @@
-library("projectg1ptds")
-library("shinycssloaders")
-library("shiny")
+
 
 # Increase the size of possible file input in this shiny app
 

@@ -1,7 +1,5 @@
 
-library("projectg1ptds")
-library("shinycssloaders")
-library("shiny")
+
 # Define UI for our application, we decided to use a navbar at the top
 shinyUI(navbarPage(
   inverse = TRUE,
