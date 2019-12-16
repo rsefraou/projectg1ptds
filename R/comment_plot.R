@@ -6,12 +6,11 @@
 #' @export
 comment_plot <- function(df) {
 
-
   by_user_score<- df %>%
     tibble::as_tibble() %>%
     filter(!user == "[deleted]")%>%
     group_by(user) %>%
-    summarize(total = sum(comment_score)) %>%
+    summarize(total = sum(comment_score), na.rm=T) %>%
     mutate(rank = percent_rank(total)) %>%
     arrange(desc(total)) %>%
     mutate(posneg = ifelse(total < 0, 1,0))
