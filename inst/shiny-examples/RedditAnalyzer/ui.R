@@ -193,6 +193,10 @@ shinyUI(navbarPage(
   # Fourth page - Analysis on specified users
   tabPanel("Track users!",
            fluidPage(
+             h3("Here are different possible analysis on the user"),
+                     p(
+                       "Each possible section provides a different analytical perspective on a Reddit user!"
+                     ),
              sidebarLayout(
                position = "right",
                sidebarPanel(
