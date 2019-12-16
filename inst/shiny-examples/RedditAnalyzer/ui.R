@@ -140,7 +140,7 @@ shinyUI(navbarPage(
                    radioButtons(
                      "col",
                      "Switch Plot",
-                     choices =  c("Where is it trending?", "Who is the most popular?", "Gallery of pictures","Wordcloud","Sentiment analysis"),
+                     choices =  c("Where is it trending?", "Gallery of pictures","Wordcloud","Sentiment analysis"),
                      selected = "Where is it trending?"
 
                    ),
@@ -175,10 +175,7 @@ shinyUI(navbarPage(
                    condition = "input.col == 'Where is it trending?'",
                    withSpinner(leafletOutput("mymap"), type = 4, color = "#c0392b")
                  ),
-                 # An analysis of comments, and calculation of who get the most vote
-                 conditionalPanel(condition = "input.col == 'Who is the most popular?'", withSpinner(
-                   plotlyOutput("histcomment"), type = 4, color = "#c0392b"
-                 )),
+
                  # Display of pictures that were posted in the subreddit
                  conditionalPanel(
                    condition = "input.col == 'Gallery of pictures'",

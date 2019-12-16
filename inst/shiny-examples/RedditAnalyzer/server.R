@@ -59,7 +59,7 @@ For a few years Reddit has became more and more popular in Europe. If your downl
 
 # Print a part of the dataframe to show user what has be downloaded
   printdf1<- shiny::eventReactive(input$display1, {
-    df1()[13:16]
+    df1()
   })
 
 
@@ -155,12 +155,6 @@ For a few years Reddit has became more and more popular in Europe. If your downl
     projectg1ptds::plot_sentiments_reddit(df3())
   })
 
-
-# Calculation of score of the comment by user on a certain topic
-
-  output$histcomment <- plotly::renderPlotly({
-    projectg1ptds::comment_plot(df3())
-  })
 
 
 # Map of where the subject chosen is more trending or at leat mentionned
