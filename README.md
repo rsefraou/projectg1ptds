@@ -8,7 +8,7 @@ This github repository has been created as part of the course PROGRAMMING TOOLS 
 The app gives an insight on Reddit conversations per topic and on Reddit users. 
 
 ## Website of the project:
-https://simiotherapy.github.io/ptds_proj_group1/
+https://simiotherapy.github.io/group1_project/
 
 ## Structure
 
