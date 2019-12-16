@@ -8,12 +8,12 @@ comment_plot <- function(df) {
 
   by_user_score<- df %>%
     tibble::as_tibble() %>%
-    filter(!user == "[deleted]")%>%
-    group_by(user) %>%
-    summarize(total = sum(comment_score), na.rm=T) %>%
-    mutate(rank = percent_rank(total)) %>%
-    arrange(desc(total)) %>%
-    mutate(posneg = ifelse(total < 0, 1,0))
+    dplyr::filter(!user == "[deleted]")%>%
+    dplyr::group_by(user) %>%
+    dplyr::summarize(total = sum(comment_score), na.rm=T) %>%
+    dplyr::mutate(rank = percent_rank(total)) %>%
+    dplyr::arrange(desc(total)) %>%
+    dplyr::mutate(posneg = ifelse(total < 0, 1,0))
 
   by_user_score <- by_user_score[c(1:10, (nrow(by_user_score)-10):nrow(by_user_score)) , ]
 
