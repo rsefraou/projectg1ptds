@@ -1,4 +1,4 @@
-
+library(shinycssloaders)
 
 # Increase the size of possible file input in this shiny app
 

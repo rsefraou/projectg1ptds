@@ -21,6 +21,7 @@ Imports:
     RedditExtractoR (>= 2.1.5),
     scales (>= 1.1.0),
     sf (>= 0.8-0),
+    shinycssloaders (>= 0.2.0),
     shinythemes(>= 1.1.2),
     sparkline (>= 2.0),
     spData (>= 0.3.2),
