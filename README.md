@@ -7,6 +7,9 @@ Rita Sefraoui Tahiri, Alexandre Schroeter, Leonard Philippossian, Simon Fornerod
 This github repository has been created as part of the course PROGRAMMING TOOLS IN DATA SCIENCE given by S.Orso and I.Rudnytskyi. This package is where the final app is and where the functions are sourced. 
 The app gives an insight on Reddit conversations per topic and on Reddit users. 
 
+## Website of the project:
+https://simiotherapy.github.io/ptds_proj_group1/
+
 ## Structure
 
 ### DESCRIPTION 
