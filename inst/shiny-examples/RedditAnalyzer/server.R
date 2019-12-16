@@ -41,7 +41,7 @@ shinyServer(function(input, output) {
   })
 
 # Create a csv file for the user data
-  shiny::observeEvent(input$load2, (readr::write.csv(df2(), file = paste0(
+  shiny::observeEvent(input$load2, (utils::write.csv(df2(), file = paste0(
     input$user, ".csv"
   ))))
 
