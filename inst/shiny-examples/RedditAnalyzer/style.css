@@ -1,11 +1,11 @@
 /*Use Courier font throughout app*/
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,500");
 @import url("https://fonts.googleapis.com/css?family=Inconsolata");
-  
+
 body {
   background: white;
-}  
-  
+}
+
 * {
   font-family: 'Raleway', sans-serif;
 }
@@ -30,7 +30,7 @@ p {
 
 /*Colour hyperlinks*/
 a {
-  color: #c0392b;s
+  color: #c0392b;
 }
 
 a:hover {
@@ -55,8 +55,8 @@ a:hover {
 }
 
 /*Colour of nav bar tabs when hovering and active*/
-.navbar-default .navbar-nav > .active > a, 
-                           .navbar-default .navbar-nav > .active > a:focus, 
+.navbar-default .navbar-nav > .active > a,
+                           .navbar-default .navbar-nav > .active > a:focus,
                            .navbar-default .navbar-nav > .active > a:hover {
                                 color: #c0392b;
                                 font-weight: bold;
@@ -72,6 +72,7 @@ input[type="text"] {
   /* Styling input */
   border: 1px solid black;
   box-shadow: #c0392b;
+  border-radius: 10px;
   background-color: white;
   transition: all .15s ease;
 }
